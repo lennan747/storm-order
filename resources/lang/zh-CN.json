@@ -1,0 +1,17 @@
+{
+  "ID": "ID",
+  "username":"用户名称",
+  "Email": "电子邮件",
+  "password":"密码",
+  "Created at": "创建时间",
+  "Home": "主页",
+  "Name": "用户名称",
+  "Password": "密码",
+  "SurePassword": "确认密码",
+  "E-Mail Address": "登录用户名",
+  "Login": "登录",
+  "Remember Me": "记住密码",
+  "Forgot Your Password": "忘记密码",
+  "Updated at": "上次登录时间",
+  "Char": "字符"
+}
