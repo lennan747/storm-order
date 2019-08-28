@@ -38,9 +38,10 @@ class OrdersController extends Controller
         }
 
 
-        $orders = $query->paginate(5);
+        $orders = $query->paginate(10);
 
-        return view('orders.index', ['orders' => $orders]);
+        $total = $orders->pluck('total_amount')->sum();
+        return view('orders.index', ['orders' => $orders,'total' => $total]);
     }
 
     public function create(Order $order)

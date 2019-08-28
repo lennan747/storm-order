@@ -44,7 +44,6 @@
                     </div>
                     <div class="card-body">
                         <table class="table">
-                            <caption>{{ Auth::user()->name }}-销售订单</caption>
                             <thead>
                             <tr>
                                 <th scope="col">客户姓名/微信号</th>
@@ -85,7 +84,14 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {!! $orders->appends(Request::except('page'))->render() !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! $orders->appends(Request::except('page'))->render() !!}
+                            </div>
+                            <div class="col-md-2 text-center"><span class="badge badge-info" style="line-height: 3;">{{ Auth::user()->name }}-销售订单</span></div>
+                            <div class="col-md-2 text-center"><span class="badge badge-info" style="line-height: 3;">订单总数({{ $order->count() }})￥</span></div>
+                            <div class="col-md-2 text-center"><span class="badge badge-info" style="line-height: 3;">订单总额({{ $total }})￥</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
