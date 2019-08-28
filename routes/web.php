@@ -13,7 +13,9 @@
 
 
 Auth::routes();
-
+Route::get('/', function (){
+    echo 1;
+});
 Route::middleware('auth')->group(function (){
     Route::get('/', 'OrdersController@index')->name('/');
     Route::get('orders', 'OrdersController@index')->name('orders.index');
