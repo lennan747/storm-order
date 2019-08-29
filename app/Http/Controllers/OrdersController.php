@@ -12,6 +12,7 @@ class OrdersController extends Controller
     //
     public function index(OrderRequest $request)
     {
+        dd(1111);
         $query = $request->user()->orders()->withOrder($request->order);
 
         $where = [];
