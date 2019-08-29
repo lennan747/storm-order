@@ -1,5 +1,7 @@
 <?php
 /**
+ * 订单列表导出
+ * 用于圆通电子面单批量生成
  * Created by PhpStorm.
  * User: leo
  * Date: 2019/8/26
@@ -36,7 +38,13 @@ class OrdersExporter extends ExcelExporter
         '备注（选填）',
         '收件人邮编（选填）',
         '收件人固话（选填）',
-        '保价金额（选填）'
+        '保价金额（选填）',
+        '物流运单号',
+        '进线渠道',
+        '盒数',
+        '尾款',
+        '发货日期',
+        '收货日期'
     ];
     protected $headingsYw = [
         '物流订单号(选填，若不填则系统自动生成；若填则不允许重复)',
@@ -53,7 +61,22 @@ class OrdersExporter extends ExcelExporter
         '备注（选填）',
         '收件人邮编（选填）',
         '收件人固话（选填）',
-        '保价金额（选填）'
+        '保价金额（选填）',
+        '物流运单号',
+
+        '用户名',
+        '进线日期',
+        '成交日期',
+        '进线渠道',
+        '详细地址',
+        '联系方式',
+        '盒数',
+        '定金',
+        '口味',
+        '尾款',
+        '发货日期',
+        '收货日期',
+        '总价'
     ];
 
 
@@ -116,6 +139,33 @@ class OrdersExporter extends ExcelExporter
                 $row['postcode'] = '';
                 $row['tel'] = '';
                 $row['insurance_price'] = '';
+
+                $row['LogisticCode'] = isset($v['ship_data']['LogisticCode']) ? $v['ship_data']['LogisticCode'] : '';
+
+//                '用户名',
+//        '进线日期',
+//        '成交日期',
+//        '进线渠道',
+//        '详细地址',
+//        '联系方式',
+//        '盒数',
+//        '定金',
+//        '口味',
+//        '尾款',
+//        '发货日期',
+//        '收货日期',
+//        '总价'
+                $row['name'] = $v['fans_name'];
+                $row['datetime'] = $v['datetime'];
+                $row['updated_at'] = $v['updated_at'];
+                $row['channel'] = $v['channel'];
+                $row['addr'] = $row['address'];
+                $row['quantity'] = $v['quantity'];
+                $row['prepayments'] = $v['prepayments'];
+                $row['taste'] = $v['taste'];
+                $row['tail'] = $v['total_amount'] - $v['prepayments'];
+                $row['tail'] = $v['total_amount'] - $v['prepayments'];
+                $row['total_amount'] = $v['total_amount'];
                 $rows[] = $row;
             }
         }

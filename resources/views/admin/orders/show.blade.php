@@ -65,6 +65,10 @@
                     <td>{{ $orderInfo->datetime }}</td>
                 </tr>
                 <tr>
+                    <td width="120px">进粉渠道</td>
+                    <td>{{ $orderInfo->channel }}</td>
+                </tr>
+                <tr>
                     <td width="120px">客户电话</td>
                     <td>{{ $orderInfo->phone_number }}</td>
                 </tr>
@@ -85,6 +89,35 @@
     <!-- /.box-body -->
 </div>
 
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">商品信息</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <td width="120px">数量</td>
+                    <td>{{ $orderInfo->quantity }}</td>
+                </tr>
+                <tr>
+                    <td width="120px">口味</td>
+                    <td>{{ $orderInfo->taste }}</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.box-body -->
+</div>
 <!--
 已发货，可查看物流状态
 -->

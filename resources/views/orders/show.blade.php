@@ -53,6 +53,17 @@
                             </li>
                             <li class="list-group-item list-group-item-success">备注：{{ $order->remark }}</li>
                         </ul>
+
+                        <ul class="list-group" style="margin-top: 1em">
+                            <li class="list-group-item">口味：{{ $order->taste }}</li>
+                            <li class="list-group-item">数量：{{ $order->quantity }}</li>
+                        </ul>
+
+                        <ul class="list-group" style="margin-top: 1em">
+                            <li class="list-group-item">进线时间：{{ $order->datetime }}</li>
+                            <li class="list-group-item">进线渠道：{{ $order->channel }}</li>
+                        </ul>
+
                     </div>
                     <div class="card-footer">
                         @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)

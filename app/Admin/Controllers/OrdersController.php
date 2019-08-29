@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-//use App\Admin\Actions\Orders\ImportOrders;
 use App\Admin\Actions\Order\ImportOrder;
 use App\Admin\Extensions\OrdersExporter;
 use App\Models\Order;
@@ -12,7 +11,6 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Grid\Displayers\DropdownActions;
 
 class OrdersController extends AdminController
 {
@@ -63,10 +61,13 @@ class OrdersController extends AdminController
             $filter->like('phone_number', '客户电话');
             $filter->equal('ship_status','物流状态')->select(Order::$shipStatusMap);
         });
-        //$grid->setActionClass(DropdownActions::class);
+
+        // 工具
         $grid->tools(function (Grid\Tools $tools) {
+            // 自定义导入工具
             $tools->append(new ImportOrder());
         });
+        // 自定义导出 这里导出的是
         $grid->exporter(new OrdersExporter());
         return $grid;
     }

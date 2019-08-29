@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
@@ -20,7 +21,8 @@ class OrdersImport implements ToCollection
                 ['ship_status', Order::SHIP_STATUS_PENDING]
             ])->update([
                 'ship_data' => json_encode(['LogisticCode' => $row[1], 'ShipperCode' => 'YTO']),
-                'ship_status' => Order::SHIP_STATUS_DELIVERED
+                'ship_status' => Order::SHIP_STATUS_DELIVERED,
+                'ship_date'=> Carbon::now()
             ]);
         }
     }
