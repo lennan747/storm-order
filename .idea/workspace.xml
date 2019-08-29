@@ -5,19 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/resources/views/orders/show.blade.php" description="                        &lt;ul class=&quot;list-group list..." line="40" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bfbef1a6-563d-4002-b11d-01505266776f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controllers/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Admin/Controllers/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Extensions/OrdersExporter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Admin/Extensions/OrdersExporter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/OrderRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/OrderRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/OrdersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/OrdersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/zh-CN.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/zh-CN.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/create_and_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/create_and_edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/show.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="bfbef1a6-563d-4002-b11d-01505266776f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Admin/Extensions/OrdersExporter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="161" column="46" selection-start-line="161" selection-start-column="46" selection-end-line="161" selection-end-column="46" />
+            <state relative-caret-position="-541">
+              <caret line="136" column="57" lean-forward="true" selection-start-line="136" selection-start-column="57" selection-end-line="136" selection-end-column="57" />
               <folding>
                 <element signature="e#6#110#0#PHP" expanded="true" />
                 <element signature="e#145#191#0#PHP" expanded="true" />
@@ -450,13 +438,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22498000" />
+    <option name="totallyTimeSpent" value="22523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1859375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1859375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -468,7 +455,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32982087" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -593,13 +580,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Exports/OrderssExport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Exports/OrderssExport.php" />
     <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Actions/GridAction.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-444">
@@ -624,13 +605,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Exports/InvoicesExport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Exports/InvoicesExport.php" />
     <entry file="file://$PROJECT_DIR$/vendor/encore/laravel-admin/src/Grid/Exporters/AbstractExporter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -665,26 +640,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Exports/OrdersExport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-          <folding>
-            <element signature="e#31#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Admin/Actions/Order/ElectronicFaceOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
-          <folding>
-            <element signature="e#43#83#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Exports/OrdersExport.php" />
+    <entry file="file://$PROJECT_DIR$/app/Admin/Actions/Order/ElectronicFaceOrder.php" />
     <entry file="file://$PROJECT_DIR$/resources/views/orders/create_and_edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -730,13 +687,7 @@
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-08-29.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_08_29_090950_add_field_to_orders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="36" column="5" lean-forward="true" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_08_29_090950_add_field_to_orders.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_08_29_094150_add_field_to_orders.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -807,8 +758,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Admin/Extensions/OrdersExporter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="161" column="46" selection-start-line="161" selection-start-column="46" selection-end-line="161" selection-end-column="46" />
+        <state relative-caret-position="-541">
+          <caret line="136" column="57" lean-forward="true" selection-start-line="136" selection-start-column="57" selection-end-line="136" selection-end-column="57" />
           <folding>
             <element signature="e#6#110#0#PHP" expanded="true" />
             <element signature="e#145#191#0#PHP" expanded="true" />
