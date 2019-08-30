@@ -59,14 +59,17 @@ class OrdersController extends Controller
         $address        = $request->input('address');
 
         $order = new Order([
-            'fans_name'          => $request->input('fans_name'),
-            'datetime'       => $request->input('datetime'),
-            'prepayments'    => $request->input('prepayments'),
-            'total_amount'   => $request->input('total_amount'),
-            'payment_method' => $request->input('payment_method'),
-            'address'        => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
-            'phone_number'   => $request->input('phone_number'),
-            'remark'         => $request->input('remark'),
+            'fans_name'       => $request->input('fans_name'),
+            'datetime'        => $request->input('datetime'),
+            'prepayments'     => $request->input('prepayments'),
+            'total_amount'    => $request->input('total_amount'),
+            'payment_method'  => $request->input('payment_method'),
+            'address'         => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
+            'phone_number'    => $request->input('phone_number'),
+            'remark'          => $request->input('remark'),
+            'quantity'        => $request->input('quantity'),
+            'channel'         => $request->input('channel'),
+            'taste'           => $request->input('taste'),
         ]);
         $order->user()->associate($user);
         $order->save();
@@ -89,21 +92,23 @@ class OrdersController extends Controller
 
     public function update(OrderRequest $request, Order $order)
     {
+        $province       = $request->input('province');
+        $city           = $request->input('city');
+        $district       = $request->input('district');
+        $address        = $request->input('address');
         $order->user()->associate($request->user());
         $order->update([
-            'fans_name' => $request->input('fans_name'),
-            'datetime' => $request->input('datetime'),
-            'prepayments' => $request->input('prepayments'),
-            'total_amount' => $request->input('total_amount'),
-            'payment_method' => $request->input('payment_method'),
-            'address' => [
-                'province' => $request->input('province'),
-                'city' => $request->input('city'),
-                'district' => $request->input('district'),
-                'address' => $request->input('address'),
-            ],
-            'phone_number' => $request->input('phone_number'),
-            'remark' => $request->input('remark'),
+            'fans_name'       => $request->input('fans_name'),
+            'datetime'        => $request->input('datetime'),
+            'prepayments'     => $request->input('prepayments'),
+            'total_amount'    => $request->input('total_amount'),
+            'payment_method'  => $request->input('payment_method'),
+            'address'         => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
+            'phone_number'    => $request->input('phone_number'),
+            'remark'          => $request->input('remark'),
+            'quantity'        => $request->input('quantity'),
+            'channel'         => $request->input('channel'),
+            'taste'           => $request->input('taste'),
         ]);
 
         return redirect()->route('orders.edit',['order' => $order->id])->with('status', '更新订单成功');
@@ -111,16 +116,11 @@ class OrdersController extends Controller
 
     public function logistics(Request $request,Order $order)
     {
-//        $orderSn = "";
-//        $expressCode = "SF";
-//        $expressSn = "71291609210123";
-        //dd([$orderSn,$expressCode,$expressSn]);
         $orderSn = $order->no;
         $expressCode = $order->ship_data['ShipperCode'];
         $expressSn = $order->ship_data['LogisticCode'];
         $ship_data = \Jormin\KDNiao\KDNiao::queryExpressInfo($orderSn, $expressCode, $expressSn);
         $order->user()->associate($request->user());
-        //dd($ship_data);
         // 暂时无法查到信息
         if($ship_data['State'] == 0){
             $order->update(['ship_data' => $ship_data]);

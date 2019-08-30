@@ -32,7 +32,10 @@ class Order extends Model
         'reviewed',
         'ship_status',
         'ship_data',
-        'phone_number'
+        'phone_number',
+        'quantity',
+        'channel',
+        'taste'
     ];
 
     // 这是一个属性转换器
@@ -43,7 +46,8 @@ class Order extends Model
         'ship_data' => 'json',
         'datetime'  => 'date',
         'prepayments' => 'decimal:2',
-        'total_amount' => 'decimal:2'
+        'total_amount' => 'decimal:2',
+        'quantity' => 'integer'
     ];
 
     public function user()

@@ -1,5 +1,7 @@
 <?php
 /**
+ * 订单列表导出
+ * 用于圆通电子面单批量生成
  * Created by PhpStorm.
  * User: leo
  * Date: 2019/8/26
@@ -15,72 +17,21 @@ class OrdersExporter extends ExcelExporter
 {
     protected $fileName = '订单列表.xls';
 
-    protected $headingsYb = [
-        '物流订单号(选填，若不填则系统自动生成；若填则不允许重复)',
-        '商品名称(选填)',
-        '数量（选填）',
-        '收件人姓名（必填）',
-        '收件人省（必填）',
-        '收件人市（必填）',
-        '收件人区（必填）',
-        '收件人地址（必填，不包含省市区）',
-        '收件人手机号（必填）',
-        '发件人姓名（必填）',
-        '发件人电话（选填）',
-        '发件人省（必填）',
-        '发件人市（必填）',
-        '发件人区（必填）,',
-        '发件地址（必填，不包含省市区）',
-        '发件人邮编（选填）',
-        '代收货款（选填）',
-        '备注（选填）',
-        '收件人邮编（选填）',
-        '收件人固话（选填）',
-        '保价金额（选填）'
-    ];
     protected $headingsYw = [
-        '物流订单号(选填，若不填则系统自动生成；若填则不允许重复)',
-        '商品名称(选填)',
-        '数量（选填）',
-        '收件人姓名（必填）',
-        '收件人地址（必填，必须包含省市区）',
-        '收件人手机号（必填）',
-        '发件人姓名（必填）',
-        '发件人电话（选填）',
-        '发件人地址（必填，必须包含省市区）',
-        '发件人邮编（选填）',
-        '代收货款（选填）',
-        '备注（选填）',
-        '收件人邮编（选填）',
-        '收件人固话（选填）',
-        '保价金额（选填）'
+        '用户名',
+        '进线日期',
+        '成交日期',
+        '进线渠道',
+        '详细地址',
+        '联系方式',
+        '盒数',
+        '定金',
+        '口味',
+        '尾款',
+        '发货日期',
+        '收货日期',
+        '总价'
     ];
-
-
-//    protected $columns = [
-//        'no' => '物流订单号(选填，若不填则系统自动生成；若填则不允许重复)',
-//        'goods_name' => '商品名称(选填)',
-//        'goods_number' => '数量（选填）',
-//        'fans_name' => '收件人姓名（必填）',
-//        'province' => '收件人省（必填）',
-//        'city' => '收件人市（必填）',
-//        'district' => '收件人区（必填）',
-//        'address' => '收件人地址（必填，不包含省市区）',
-//        'phone_number' => '收件人手机号（必填）',
-//        'send_name' => '发件人姓名（必填）',
-//        'send_phone' => '发件人电话（选填）',
-//        'send_province' => '发件人省（必填）',
-//        'send_city' => '发件人市（必填）',
-//        'send_district' => '发件人区（必填）,',
-//        'send_address' => '发件地址（必填，不包含省市区）',
-//        'send_postcode' => '发件人邮编（选填）',
-//        'collection' => '代收货款（选填）',
-//        'remark' => '备注（选填）',
-//        'postcode' => '收件人邮编（选填）',
-//        'tel' => '收件人固话（选填）',
-//        'insurance_price' => '保价金额（选填）'
-//    ];
-
 
     public function export()
     {
@@ -94,28 +45,17 @@ class OrdersExporter extends ExcelExporter
         if (count($data)) {
             foreach ($data as $v) {
                 $row = [];
-                $row['no'] = $v['no'];
-                $row['goods_name'] = '';
-                $row['goods_number'] = '';
-                $row['fans_name'] = $v['fans_name'];
-//                $row['province'] = $v['address']['province'];
-//                $row['city'] = $v['address']['city'];
-//                $row['district'] = $v['address']['district'];
-                $row['address'] = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address'];
-                $row['phone_number'] = $v['phone_number'];
-                $row['send_name'] = '杨武东';
-                $row['send_phone'] = '13677344771';
-//                $row['send_province'] = '湖南省';
-//                $row['send_city'] = '长沙市';
-//                $row['send_district'] = '岳麓区';
-//                $row['send_address'] = '发件地址（必填，不包含省市区）';
-                $row['send_address'] = '湖南省长沙市岳麓区新长沙中心B3栋206';
-                $row['send_postcode'] = '';
-                $row['collection'] = $v['total_amount'] - $v['prepayments'];
-                $row['remark'] = $v['remark'];
-                $row['postcode'] = '';
-                $row['tel'] = '';
-                $row['insurance_price'] = '';
+                $row['name'] = $v['fans_name'];
+                $row['datetime'] = $v['datetime'];
+                $row['updated_at'] = $v['updated_at'];
+                $row['channel'] = $v['channel'];
+                $row['addr'] = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address'];
+                $row['quantity'] = $v['quantity'];
+                $row['prepayments'] = $v['prepayments'];
+                $row['taste'] = $v['taste'];
+                $row['tail'] = $v['total_amount'] - $v['prepayments'];
+                $row['tail'] = $v['total_amount'] - $v['prepayments'];
+                $row['total_amount'] = $v['total_amount'];
                 $rows[] = $row;
             }
         }

@@ -185,6 +185,42 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="channel" class="col-md-4 col-form-label text-md-right">进线渠道</label>
+                                <div class="col-md-6">
+                                    <input id="channel" type="text" class="form-control" name="channel" value="{{ old('address' ,$order->channel) }}" required>
+                                    @error('channel')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="taste" class="col-md-4 col-form-label text-md-right">口味</label>
+                                <div class="col-md-6">
+                                    <input id="taste" type="text" class="form-control" name="taste" value="{{ old('address' ,$order->taste) }}" required>
+                                    @error('taste')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="quantity" class="col-md-4 col-form-label text-md-right">数量</label>
+                                <div class="col-md-6">
+                                    <input id="quantity" type="text" class="form-control" name="quantity" value="{{ old('address' ,$order->quantity) }}" required>
+                                    @error('quantity')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-//use App\Admin\Actions\Orders\ImportOrders;
+use App\Admin\Actions\Order\ElectronicFaceOrder;
 use App\Admin\Actions\Order\ImportOrder;
 use App\Admin\Extensions\OrdersExporter;
 use App\Models\Order;
@@ -12,7 +12,6 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Grid\Displayers\DropdownActions;
 
 class OrdersController extends AdminController
 {
@@ -32,42 +31,61 @@ class OrdersController extends AdminController
     {
         $grid = new Grid(new Order);
 
+        // 查询过滤器
+        $grid->filter(function ($filter){
+            $filter->disableIdFilter();
+            $filter->like('name', '客户姓名');
+            $filter->like('phone_number', '客户电话');
+            $filter->where(function ($query) {
+                $query->whereHas('user', function ($query) {
+                    $query->where('name', 'like', "%{$this->input}%");
+                });
+            }, '下单员');
+            $filter->equal('ship_status','物流状态')->select(Order::$shipStatusMap);
+        });
+
+        // 排序方式
+        $grid->model()->orderBy('id', 'desc');
 
         $grid->id('ID');
         $grid->no('订单流水号');
-        $grid->user_id('下单员')->display(function ($userId){
-            return User::find($userId)->name;
-        });
         $grid->fans_name('客户姓名');
-        $grid->datetime('客户进粉时间');
-        $grid->prepayments('预付款');
-        $grid->total_amount('订单金额');
-        $grid->closed('订单状态')->display(function ($closed){
-            return $closed ? '已关闭' : '进行中';
+        $grid->datetime('客户进粉时间')->sortable();
+        $grid->prepayments('预付款')->sortable();
+        $grid->total_amount('订单金额')->sortable();
+        $grid->column('unpaid_amount','未付金额')->display(function (){
+             return $this['total_amount']-$this['prepayments'];
         });
         $grid->ship_status('物流状态')->display(function ($shipStatus){
             return Order::$shipStatusMap[$shipStatus];
         });
-        $grid->created_at('下单时间');
+        $grid->closed('订单状态')->display(function ($closed){
+            return $closed ? '已关闭' : '进行中';
+        });
 
-        $grid->disableCreateButton();
-        //$grid->setActionClass(ImportOrders::class);
+        $grid->created_at('下单时间')->sortable();
+        $grid->user_id('下单员')->display(function ($userId){
+            return User::find($userId)->name;
+        });
         $grid->actions(function ($actions){
             $actions->disableDelete();
             $actions->disableEdit();
         });
 
-        $grid->filter(function ($filter){
-            $filter->disableIdFilter();
-            $filter->like('name', '客户姓名');
-            $filter->like('phone_number', '客户电话');
-            $filter->equal('ship_status','物流状态')->select(Order::$shipStatusMap);
-        });
-        //$grid->setActionClass(DropdownActions::class);
+        // 工具
         $grid->tools(function (Grid\Tools $tools) {
+            // 导入电子面单订单
             $tools->append(new ImportOrder());
+            // 导出电子面单订单
+            $tools->append(new ElectronicFaceOrder());
         });
+
+        // 自定义导出订单
         $grid->exporter(new OrdersExporter());
+
+        $grid->disableColumnSelector();
+        $grid->disableCreateButton();
+
         return $grid;
     }
 

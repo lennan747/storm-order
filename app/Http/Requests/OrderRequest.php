@@ -28,7 +28,8 @@ class OrderRequest extends Request
                         'district'       => 'required|max:10',
                         'address'        => 'required|max:100',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
-                        'remark'         => 'nullable|max:100'
+                        'remark'         => 'nullable|max:100',
+                        'quantity'       => 'nullable|numeric'
                     ];
                 }
             // UPDATE
@@ -45,7 +46,8 @@ class OrderRequest extends Request
                         'district'       => 'required|max:10',
                         'address'        => 'required|max:100',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
-                        'remark'         => 'nullable|max:100'
+                        'remark'         => 'nullable|max:100',
+                        'quantity'       => 'nullable|numeric'
                     ];
                 }
             case 'PATCH':
@@ -69,7 +71,7 @@ class OrderRequest extends Request
     public function attributes()
     {
         return [
-            'fans_name'           => '客户姓名或微信号',
+            'fans_name'      => '客户姓名或微信号',
             'datetime'       => '进线时间',
             'prepayments'    => '预付款',
             'total_amount'   => '成交价',
