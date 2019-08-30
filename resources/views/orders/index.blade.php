@@ -51,6 +51,7 @@
                                 <th scope="col">进粉时间</th>
                                 <th scope="col">订单金额</th>
                                 <th scope="col">预付款</th>
+                                <th scope="col">未付款</th>
                                 <th scope="col">订单状态</th>
                                 <th scope="col">下单时间</th>
                                 <th scope="col">操作</th>
@@ -64,6 +65,7 @@
                                     <td>{{ $order->datetime->toDateString() }}</td>
                                     <td>{{ $order->total_amount }}</td>
                                     <td>{{ $order->prepayments }}</td>
+                                    <td>{{ $order->total_amount - $order->prepayments }}</td>
                                     <td>
                                         @if($order->closed)
                                             订单完成

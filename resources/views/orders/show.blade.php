@@ -42,6 +42,7 @@
                             <li class="list-group-item">订单流水号：{{ $order->no }}</li>
                             <li class="list-group-item">支付方式：{{ $order->payment_method }}</li>
                             <li class="list-group-item">预付款：{{ $order->prepayments }}</li>
+                            <li class="list-group-item">未付款：{{ $order->total_amount -$order->prepayments }}</li>
                             <li class="list-group-item">订单金额：{{ $order->total_amount }}</li>
                         </ul>
 

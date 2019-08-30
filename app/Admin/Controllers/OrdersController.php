@@ -41,6 +41,9 @@ class OrdersController extends AdminController
         $grid->datetime('客户进粉时间');
         $grid->prepayments('预付款');
         $grid->total_amount('订单金额');
+        $grid->column('unpaid_amount','未付金额')->display(function (){
+             return $this['total_amount']-$this['prepayments'];
+        });
         $grid->closed('订单状态')->display(function ($closed){
             return $closed ? '已关闭' : '进行中';
         });

@@ -26,6 +26,10 @@
                     <td>{{ $orderInfo->total_amount }}</td>
                 </tr>
                 <tr>
+                    <td width="120px">未付金额</td>
+                    <td>{{ $orderInfo->total_amount - $orderInfo->prepayments}}</td>
+                </tr>
+                <tr>
                     <td width="120px">支付方式</td>
                     <td>{{ $orderInfo->paymentMethod }}</td>
                 </tr>
