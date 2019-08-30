@@ -1,7 +1,7 @@
-<footer class="footer">
-    <div class="container">
-        <p class="float-left">
-            由 <a href="" target="_blank">leoN.Z</a> 设计和编码 <span style="color: #e27575;font-size: 14px;">❤</span>
+<footer class="row tm-mt-small">
+    <div class="col-12 font-weight-light">
+        <p class="d-inline-block tm-bg-black text-white py-2 px-4">
+            Copyright &copy; 2019 回音文化订单跟踪系统. Created by leo.N
         </p>
     </div>
 </footer>
