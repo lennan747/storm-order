@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Order\ElectronicFaceOrder;
 use App\Admin\Actions\Order\ImportOrder;
 use App\Admin\Extensions\OrdersExporter;
 use App\Models\Order;
@@ -64,10 +65,12 @@ class OrdersController extends AdminController
 
         // 工具
         $grid->tools(function (Grid\Tools $tools) {
-            // 自定义导入工具
+            // 到二u电子面单订单
             $tools->append(new ImportOrder());
+            // 导出电子面单订单
+            $tools->append(new ElectronicFaceOrder());
         });
-        // 自定义导出 这里导出的是
+        // 自定义导出订单
         $grid->exporter(new OrdersExporter());
         return $grid;
     }
