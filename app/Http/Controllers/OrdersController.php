@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -78,6 +79,7 @@ class OrdersController extends Controller
 
     public function edit(Order $order)
     {
+        $this->authorize('edit', $order);
         // laravel会用Carbon对象把data格式自动转化未dataTime格式
         // dd($order->datetime->toDateString());
         $payment_method = Payment::all();
@@ -86,12 +88,14 @@ class OrdersController extends Controller
 
     public function show(Order $order)
     {
+        $this->authorize('show', $order);
         //$order->payment_method = Payment::find($order->payment_method)->name;
         return view('orders.show', compact('order'));
     }
 
     public function update(OrderRequest $request, Order $order)
     {
+        $this->authorize('update', $order);
         $province       = $request->input('province');
         $city           = $request->input('city');
         $district       = $request->input('district');
@@ -116,6 +120,7 @@ class OrdersController extends Controller
 
     public function logistics(Request $request,Order $order)
     {
+        $this->authorize('logistics', $order);
         $orderSn = $order->no;
         $expressCode = $order->ship_data['ShipperCode'];
         $expressSn = $order->ship_data['LogisticCode'];
