@@ -11,7 +11,8 @@ class OrdersImport implements ToCollection
 {
     public function collection(Collection $rows)
     {
-        //dd($rows);
+        // 未发货订单 导入订单物流号信息
+        // 更新物流状态到发货状态
         $rows->shift();
         foreach ($rows as $row){
             //dd($row);
