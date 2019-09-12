@@ -42,6 +42,7 @@
                             </div>
                         </nav>
                     </div>
+                    @if($orders)
                     <div class="card-body">
                         <table class="table">
                             <thead>
@@ -95,6 +96,7 @@
                             <div class="col-md-2 text-center"><span class="badge badge-info" style="line-height: 3;">订单总额({{ $total }})￥</span></div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

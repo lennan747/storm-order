@@ -13,6 +13,11 @@ class OrdersController extends Controller
     //
     public function index(OrderRequest $request)
     {
+    	
+    	if(!$request->user()->orders()){
+    		return redirect()->route('orders.create');
+    	}
+    	
         $query = $request->user()->orders()->withOrder($request->order);
 
         $where = [];
@@ -40,8 +45,11 @@ class OrdersController extends Controller
 
 
         $orders = $query->paginate(10);
-
-        $total = $orders->pluck('total_amount')->sum();
+        
+        if($orders)
+        {
+            $total = $orders->pluck('total_amount')->sum();
+        }
         return view('orders.index', ['orders' => $orders,'total' => $total]);
     }
 

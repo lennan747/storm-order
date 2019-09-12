@@ -14,7 +14,7 @@
 
 Auth::routes();
 Route::middleware('auth')->group(function (){
-    Route::get('/', 'OrdersController@index')->name('/');
+    Route::get('/', 'OrdersController@create')->name('/');
     Route::get('orders', 'OrdersController@index')->name('orders.index');
 
     Route::get('orders/{order}/show','OrdersController@show')->name('orders.show');                    // 订单详情
