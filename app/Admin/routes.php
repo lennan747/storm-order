@@ -39,6 +39,6 @@ Route::group([
     $router->resource('sales-datas', SalesDatasController::class);
 
     // 微信公众号
-    $router->resource('wx-qrcodes', WxQrcodesController::class);
-    $router->resource('plans', PlanController::class);
+    //$router->resource('wx-qrcodes', WxQrcodesController::class);
+    //$router->resource('plans', PlanController::class);
 });
