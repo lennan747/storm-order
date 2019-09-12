@@ -48,6 +48,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">客户姓名/微信号</th>
+                                <th scope="col">客户姓名年纪</th>
                                 <th scope="col">订单号</th>
                                 <th scope="col">进粉时间</th>
                                 <th scope="col">订单金额</th>
@@ -55,6 +56,7 @@
                                 <th scope="col">未付款</th>
                                 <th scope="col">订单状态</th>
                                 <th scope="col">下单时间</th>
+                                <th scope="col">成交时间</th>
                                 <th scope="col">操作</th>
                             </tr>
                             </thead>
@@ -62,6 +64,7 @@
                             @foreach($orders as $order)
                                 <tr>
                                     <th scope="row">{{ $order->fans_name }}</th>
+                                    <td>{{ $order->age }}</td>
                                     <td>{{ $order->no }}</td>
                                     <td>{{ $order->datetime->toDateString() }}</td>
                                     <td>{{ $order->total_amount }}</td>
@@ -75,6 +78,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $order->created_at }}</td>
+                                    <td>{{ $order->transaction_datetime->toDateString() }}</td>
                                     <td>
                                         @if($order->ship_status === \App\Models\Order::SHIP_STATUS_PENDING)
                                             <a href="{{ route('orders.edit', ['order' => $order->id]) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">修改</a>
