@@ -38,10 +38,13 @@ class OrdersController extends Controller
             $query->whereDate('created_at', $request->create_at);
         }
 
-
         $orders = $query->paginate(10);
 
-        $total = $orders->pluck('total_amount')->sum();
+        if($orders)
+        {
+            $total = $orders->pluck('total_amount')->sum();
+        }
+
         return view('orders.index', ['orders' => $orders,'total' => $total]);
     }
 
