@@ -86,6 +86,7 @@
                             </tbody>
                         </table>
                     </div>
+                    @if($orders->count() > 0)
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-6">
@@ -96,6 +97,7 @@
                             <div class="col-md-2 text-center"><span class="badge badge-info" style="line-height: 3;">订单总额({{ $total }})￥</span></div>
                         </div>
                     </div>
+                    @endif
                     @endif
                 </div>
             </div>
