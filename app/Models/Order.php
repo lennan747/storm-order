@@ -35,7 +35,9 @@ class Order extends Model
         'phone_number',
         'quantity',
         'channel',
-        'taste'
+        'taste',
+        'transaction_datetime',
+        'age'
     ];
 
     // 这是一个属性转换器
@@ -47,7 +49,8 @@ class Order extends Model
         'datetime'  => 'date',
         'prepayments' => 'decimal:2',
         'total_amount' => 'decimal:2',
-        'quantity' => 'integer'
+        'quantity' => 'integer',
+        'transaction_datetime' => 'date',
     ];
 
     public function user()

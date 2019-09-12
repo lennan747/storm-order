@@ -80,6 +80,8 @@ class OrdersController extends Controller
             'quantity'        => $request->input('quantity'),
             'channel'         => $request->input('channel'),
             'taste'           => $request->input('taste'),
+            'age'           => $request->input('age'),
+            'transaction_datetime'           => $request->input('transaction_datetime'),
         ]);
         $order->user()->associate($user);
         $order->save();
@@ -122,6 +124,8 @@ class OrdersController extends Controller
             'quantity'        => $request->input('quantity'),
             'channel'         => $request->input('channel'),
             'taste'           => $request->input('taste'),
+            'age'            => $request->input('age'),
+            'transaction_datetime' => $request->input('transaction_datetime'),
         ]);
 
         return redirect()->route('orders.edit',['order' => $order->id])->with('status', '更新订单成功');

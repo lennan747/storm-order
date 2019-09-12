@@ -51,10 +51,34 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="age" class="col-md-4 col-form-label text-md-right">客户年纪</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control col-md-12" name="age" value="{{ old('age', $order->age) }}" required>
+                                    @error('age')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="datetime" class="col-md-4 col-form-label text-md-right">进线时间</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="datetime" id="datetimepicker" autocomplete="off" value="{{ old('datetime',$order ->id ? $order->datetime->toDateString(): '') }}" required>
                                     @error('datetime')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="transaction_datetime" class="col-md-4 col-form-label text-md-right">成交时间</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="transaction_datetime" id="datetimepicker2" autocomplete="off" value="{{ old('datetime',$order ->id ? $order->transaction_datetime->toDateString(): '') }}" required>
+                                    @error('transaction_datetime')
                                     <div class="mb-3 bg-danger text-white">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -146,7 +170,7 @@
 
 
                             <div class="form-group row">
-                                <label for="prepayments" class="col-md-4 col-form-label text-md-right">预付款</label>
+                                <label for="prepayments" class="col-md-4 col-form-label text-md-right">预付定金</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="prepayments" value="{{ old('prepayments', $order->prepayments) }}" required>
                                     @error('prepayments')
@@ -158,7 +182,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="total_amount" class="col-md-4 col-form-label text-md-right">订单金额</label>
+                                <label for="total_amount" class="col-md-4 col-form-label text-md-right">订单总金额</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="total_amount" value="{{ old('total_amount', $order->total_amount) }}" required>
                                     @error('name')
@@ -212,7 +236,7 @@
                             <div class="form-group row">
                                 <label for="quantity" class="col-md-4 col-form-label text-md-right">数量</label>
                                 <div class="col-md-6">
-                                    <input id="quantity" type="text" class="form-control" name="quantity" value="{{ old('address' ,$order->quantity) }}" required>
+                                    <input id="quantity" type="number" class="form-control" name="quantity" value="{{ old('address' ,$order->quantity) }}" required>
                                     @error('quantity')
                                     <div class="mb-3 bg-danger text-white">
                                         <strong>{{ $message }}</strong>
@@ -242,6 +266,14 @@
     <script src="{{ asset('js/bootstrap-datetimepicker.zh-CN.js') }}"></script>
     <script>
         $('#datetimepicker').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            minView: 2,
+            todayBtn:true,
+            autoclose:true
+        });
+
+        $('#datetimepicker2').datetimepicker({
             format: 'yyyy-mm-dd',
             language: 'zh-CN',
             minView: 2,
