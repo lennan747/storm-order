@@ -43,13 +43,20 @@ class OrdersController extends Controller
             $query->whereDate('created_at', $request->create_at);
         }
 
-
         $orders = $query->paginate(10);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 57ae204458f5a68d3cf2ab9b0da225d9fd0c378c
         if($orders)
         {
             $total = $orders->pluck('total_amount')->sum();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 57ae204458f5a68d3cf2ab9b0da225d9fd0c378c
         return view('orders.index', ['orders' => $orders,'total' => $total]);
     }
 

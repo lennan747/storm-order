@@ -31,4 +31,11 @@ Route::group([
     $router->get('payments/{payment}/edit', 'PaymentsController@edit')->name('admin.payments.edit');
     $router->put('payments/{payment}', 'PaymentsController@update')->name('admin.payments.update');
     $router->get('payments/{payment}', 'PaymentsController@show')->name('admin.payments.show');
+
+    // 进线管理
+    $router->resource('enter-plans', EnterPlansController::class);
+
+    // 微信公众号
+    $router->resource('wx-qrcodes', WxQrcodesController::class);
+    $router->resource('plans', PlanController::class);
 });
