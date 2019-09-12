@@ -13,6 +13,9 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('orders.create') }}">添加</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">列表</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ route('sales.create') }}">销售数据添加</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('sales.index') }}">销售数据列表</a></li>
             <!--
                 <li class="nav-item"><a class="nav-link" href="">列表</a></li>
                 <li class="nav-item"><a class="nav-link" href="">统计</a></li>
