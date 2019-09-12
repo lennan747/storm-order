@@ -35,6 +35,9 @@ Route::group([
     // 进线管理
     $router->resource('enter-plans', EnterPlansController::class);
 
+    // 销售管理
+    $router->resource('sales-datas', SalesDatasController::class);
+
     // 微信公众号
     $router->resource('wx-qrcodes', WxQrcodesController::class);
     $router->resource('plans', PlanController::class);
