@@ -43,12 +43,12 @@ class ElectronicFaceOrder extends BatchAction
             $row['fans_name'] = $item->fans_name;
             $row['address'] = $item->address['province'].$item->address['city'].$item->address['district'].$item->address['address'];
             $row['phone_number'] = $item->phone_number;
-            $row['send_name'] = '杨武东';
+            $row['send_name'] = '杨小星';
             $row['send_phone'] = '13677344771';
-            $row['send_address'] = '湖南省长沙市岳麓区新长沙中心B3栋206';
+            $row['send_address'] = '湖南省长沙市岳麓区新长海中心';
             $row['send_postcode'] = '';
             $row['collection'] = $item->total_amount - $item->prepayments;
-            $row['remark'] = $item->remark;
+            $row['remark'] = '口味:'.$item->taste.'数量:'.$item->quantity.'其他：'.$item->remark;
             $row['postcode'] = '';
             $row['tel'] = '';
             $row['insurance_price'] = '';
