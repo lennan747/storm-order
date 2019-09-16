@@ -16,11 +16,13 @@ class SalesData extends Model
         'delete_number',
         'transaction_amount',
         'sales_time',
-        'transaction_number'
+        'transaction_number',
+        'mark'
     ];
 
     protected $casts = [
-        'transaction_amount' => 'decimal:2'
+        'transaction_amount' => 'decimal:2',
+        'mark'               => 'json'
     ];
 
     public function user()

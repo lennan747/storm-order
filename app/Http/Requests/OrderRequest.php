@@ -36,7 +36,7 @@ class OrderRequest extends Request
             case 'PUT':
                 {
                     return [
-                        'fans_name'           => 'required|between:2,25',
+                        'fans_name'      => 'required|between:2,25',
                         'datetime'       => 'required|date_format:Y-m-d',
                         'prepayments'    => 'required|numeric',
                         'payment_method' => 'required',

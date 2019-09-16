@@ -27,7 +27,7 @@ class SalesDatasController extends AdminController
         $grid = new Grid(new SalesData);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.name', '下单员');
+        $grid->column('user.name', '下单员')->sortable();
         $grid->column('sales_time', '销售日期');
         $grid->column('channel', '进线渠道');
         $grid->column('enter_number','进线人数');
@@ -64,17 +64,39 @@ class SalesDatasController extends AdminController
     {
         $show = new Show(SalesData::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('sales_time', __('Sales time'));
-        $show->field('channel', __('Channel'));
-        $show->field('enter_number', __('Enter number'));
-        $show->field('repay_number', __('Repay number'));
-        $show->field('delete_number', __('Delete number'));
-        $show->field('transaction_amount', __('Transaction amount'));
-        $show->field('transaction_number', __('Transaction number'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        //$show->field('id', __('Id'));
+        $show->field('user_id', '下单员');
+        $show->field('sales_time','销售日期');
+        $show->field('channel', '进线渠道');
+        $show->field('enter_number', '进线人数');
+        $show->field('repay_number', '回复人数');
+        $show->field('delete_number', '删除人数');
+        $show->field('transaction_amount', '交易金额');
+        $show->field('transaction_number', '交易订单数');
+        $show->field('mark', '日志')->unescape()->as(function ($mark){
+            $html = "";
+            if(is_null($mark)){
+                return $html;
+            }
+            foreach ($mark as $value){
+                $html2 = $value['updated_at'].':';
+                $html2 = $html2."进线渠道:".$value['channel']
+                    .",进线人数:".$value['enter_number']
+                    .",回复人数:".$value['repay_number']
+                    .',删粉数:'.$value['delete_number']
+                    .',交易金额:'.$value['transaction_amount']
+                    .',交易单数:'.$value['transaction_number']
+                    .',删粉率'.(number_format($value['delete_number']/$value['enter_number'],4)*100).'%'
+                    .',回复率'.(number_format($value['delete_number']/$value['enter_number'],4)*100).'%';
+                //updated_at
+
+                $html = $html.'</br>'.$html2;
+            }
+
+            return $html;
+        });
+//        $show->field('created_at', __('Created at'));
+//        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
