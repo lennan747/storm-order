@@ -4,7 +4,8 @@
         <a class="navbar-brand " href="{{ url('/') }}">
             订单跟踪系统
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -16,10 +17,10 @@
 
                 <li class="nav-item"><a class="nav-link" href="{{ route('sales.create') }}">销售数据添加</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('sales.index') }}">销售数据列表</a></li>
-            <!--
-                <li class="nav-item"><a class="nav-link" href="">列表</a></li>
-                <li class="nav-item"><a class="nav-link" href="">统计</a></li>
--->
+                <!--
+                    <li class="nav-item"><a class="nav-link" href="">列表</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">统计</a></li>
+    -->
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -27,15 +28,17 @@
                 <!-- 登录注册链接开始 -->
                 @guest
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
-                <!--
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
-                    -->
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
+
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('users.password.edit') }}">
+                                修改密码
+                            </a>
                             <a class="dropdown-item" id="logout" href="#"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 退出登录
@@ -44,9 +47,10 @@
                                 {{ csrf_field() }}
                             </form>
                         </div>
+
                     </li>
                 @endguest
-               <!-- 登录注册链接结束 -->
+            <!-- 登录注册链接结束 -->
             </ul>
         </div>
     </div>
