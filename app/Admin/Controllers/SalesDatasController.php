@@ -39,7 +39,7 @@ class SalesDatasController extends AdminController
             return number_format($this->delete_number/$this->enter_number,4)*100 .'%';
         });
 
-        $grid->column('repay_number','回复率')->display(function (){
+        $grid->column('repay_rate','回复率')->display(function (){
             return number_format($this->repay_number/$this->enter_number,4)*100 .'%';
         });
         //$grid->column('created_at', );
