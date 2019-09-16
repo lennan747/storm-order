@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td width="120px">支付方式</td>
-                    <td>{{ $orderInfo->paymentMethod }}</td>
+                    <td>{{ $orderInfo->payment_method }}</td>
                 </tr>
                 <tr>
                     <td width="120px">下单员</td>
@@ -62,7 +62,7 @@
             <table class="table table-striped">
                 <tr>
                     <td width="120px">客户名称</td>
-                    <td>{{ $orderInfo->name }}</td>
+                    <td>{{ $orderInfo->fans_name }}</td>
                 </tr>
                 <tr>
                     <td width="120px">进粉时间</td>
