@@ -47,8 +47,8 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">客户姓名/微信号</th>
-                                <th scope="col">客户姓名年纪</th>
+                                <th scope="col">客户姓名</th>
+                                <th scope="col">客户年纪</th>
                                 <th scope="col">订单号</th>
                                 <th scope="col">进粉时间</th>
                                 <th scope="col">订单金额</th>
