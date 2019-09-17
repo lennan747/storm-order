@@ -18,7 +18,7 @@ class OrderRequest extends Request
             case 'POST':
                 {
                     return [
-                        'fans_name'           => 'required|between:2,25',
+                        'fans_name'      => 'required|between:2,25',
                         'datetime'       => 'required|date_format:Y-m-d',
                         'prepayments'    => 'required|numeric',
                         'payment_method' => 'required',
@@ -29,7 +29,8 @@ class OrderRequest extends Request
                         'address'        => 'required|max:200',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
-                        'quantity'       => 'nullable|numeric'
+                        'quantity'       => 'nullable|numeric',
+                        'express'        => 'required'
                     ];
                 }
             // UPDATE
@@ -47,7 +48,8 @@ class OrderRequest extends Request
                         'address'        => 'required|max:200',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
-                        'quantity'       => 'nullable|numeric'
+                        'quantity'       => 'nullable|numeric',
+                        'express'        => 'required'
                     ];
                 }
             case 'PATCH':
@@ -71,18 +73,19 @@ class OrderRequest extends Request
     public function attributes()
     {
         return [
-            'fans_name'      => '客户姓名或微信号',
-            'datetime'       => '进线时间',
-            'prepayments'    => '预付款',
-            'total_amount'   => '成交价',
-            'payment_method' => '付款方式',
-            'province'       => '省份',
-            'city'           => '城市',
-            'district'       => '地区',
-            'address'        => '收货地址',
+            'fans_name'               => '客户姓名或微信号',
+            'datetime'                => '进线时间',
+            'prepayments'             => '预付款',
+            'total_amount'            => '成交价',
+            'payment_method'          => '付款方式',
+            'province'                => '省份',
+            'city'                    => '城市',
+            'district'                => '地区',
+            'address'                 => '收货地址',
             'phone_number.required'   => '收货人电话',
-            'phone_number.regex'   => '收货人电话格式不对',
-            'remark'         => '备注'
+            'phone_number.regex'      => '收货人电话格式不对',
+            'remark'                  => '备注',
+            'express'                 => '快递方式'
         ];
     }
 }

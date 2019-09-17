@@ -69,19 +69,20 @@ class OrdersController extends Controller
         $address        = $request->input('address');
 
         $order = new Order([
-            'fans_name'       => $request->input('fans_name'),
-            'datetime'        => $request->input('datetime'),
-            'prepayments'     => $request->input('prepayments'),
-            'total_amount'    => $request->input('total_amount'),
-            'payment_method'  => $request->input('payment_method'),
-            'address'         => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
-            'phone_number'    => $request->input('phone_number'),
-            'remark'          => $request->input('remark'),
-            'quantity'        => $request->input('quantity'),
-            'channel'         => $request->input('channel'),
-            'taste'           => $request->input('taste'),
-            'age'           => $request->input('age'),
+            'fans_name'                      => $request->input('fans_name'),
+            'datetime'                       => $request->input('datetime'),
+            'prepayments'                    => $request->input('prepayments'),
+            'total_amount'                   => $request->input('total_amount'),
+            'payment_method'                 => $request->input('payment_method'),
+            'address'                        => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
+            'phone_number'                   => $request->input('phone_number'),
+            'remark'                         => $request->input('remark'),
+            'quantity'                       => $request->input('quantity'),
+            'channel'                        => $request->input('channel'),
+            'taste'                          => $request->input('taste'),
+            'age'                            => $request->input('age'),
             'transaction_datetime'           => $request->input('transaction_datetime'),
+            'ship_data'                      => ['ShipperCode' => $request->input('express')],
         ]);
         $order->user()->associate($user);
         $order->save();
@@ -104,6 +105,12 @@ class OrdersController extends Controller
         return view('orders.show', compact('order'));
     }
 
+    /**
+     * @param OrderRequest $request
+     * @param Order $order
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(OrderRequest $request, Order $order)
     {
         $this->authorize('update', $order);
@@ -113,24 +120,32 @@ class OrdersController extends Controller
         $address        = $request->input('address');
         $order->user()->associate($request->user());
         $order->update([
-            'fans_name'       => $request->input('fans_name'),
-            'datetime'        => $request->input('datetime'),
-            'prepayments'     => $request->input('prepayments'),
-            'total_amount'    => $request->input('total_amount'),
-            'payment_method'  => $request->input('payment_method'),
-            'address'         => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
-            'phone_number'    => $request->input('phone_number'),
-            'remark'          => $request->input('remark'),
-            'quantity'        => $request->input('quantity'),
-            'channel'         => $request->input('channel'),
-            'taste'           => $request->input('taste'),
-            'age'            => $request->input('age'),
-            'transaction_datetime' => $request->input('transaction_datetime'),
+            'fans_name'                  => $request->input('fans_name'),
+            'datetime'                   => $request->input('datetime'),
+            'prepayments'                => $request->input('prepayments'),
+            'total_amount'               => $request->input('total_amount'),
+            'payment_method'             => $request->input('payment_method'),
+            'address'                    => ['province' => $province, 'city'     => $city, 'district' => $district, 'address'  => $address],
+            'phone_number'               => $request->input('phone_number'),
+            'remark'                     => $request->input('remark'),
+            'quantity'                   => $request->input('quantity'),
+            'channel'                    => $request->input('channel'),
+            'taste'                      => $request->input('taste'),
+            'age'                        => $request->input('age'),
+            'transaction_datetime'       => $request->input('transaction_datetime'),
+            'ship_data'                  => ['ShipperCode' => $request->input('express')],
         ]);
 
         return redirect()->route('orders.edit',['order' => $order->id])->with('status', '更新订单成功');
     }
 
+    /**
+     * 物流查询
+     * @param Request $request
+     * @param Order $order
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function logistics(Request $request,Order $order)
     {
         $this->authorize('logistics', $order);

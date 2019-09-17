@@ -70,7 +70,7 @@ class OrdersController extends AdminController
         });
         $grid->actions(function ($actions){
             $actions->disableDelete();
-            $actions->disableEdit();
+            //$actions->disableEdit();
         });
 
         // 工具
@@ -149,7 +149,12 @@ class OrdersController extends AdminController
     public function detailNew($id)
     {
         $orderInfo = Order::findOrFail($id);
-        return view('admin.orders.show',['orderInfo' => $orderInfo]);
+        $express = [
+            'YD'  => '韵达快递',
+            'YTO' => '圆通速递',
+            'SF'  => '顺丰快递'
+        ];
+        return view('admin.orders.show',['orderInfo' => $orderInfo,'express' => $express]);
     }
 
     /**
@@ -160,22 +165,31 @@ class OrdersController extends AdminController
     protected function form()
     {
         $form = new Form(new Order);
+        //$form->textarea('address', '寄件地址');
+        //$form->switch('closed', '订单状态');
+        //$form->switch('reviewed', __('Reviewed'));
+        $form->embeds('ship_data', '物流信息', function ($form) {
+            //...
+            $form->text('LogisticCode','物流单号');
+            $form->select('ShipperCode','物流公司')->options([
+                'YD'  => '韵达快递',
+                'YTO' => '圆通速递',
+                'SF'  => '顺丰快递'
+            ]);
+            $form->textarea('Traces','物流信息')->readonly();
+            $form->text('Reason','失败理由')->readonly();
+        });
 
-        $form->number('user_id', __('User id'));
-        $form->text('fans_name', __('Fans name'));
-        $form->date('datetime', __('Datetime'))->default(date('Y-m-d'));
-        $form->text('payment_method', __('Payment method'));
-        $form->text('phone_number', __('Phone number'));
-        $form->text('no', __('No'));
-        $form->decimal('prepayments', __('Prepayments'));
-        $form->decimal('total_amount', __('Total amount'));
-        $form->textarea('address', __('Address'));
-        $form->text('ship_status', __('Ship status'))->default('pending');
-        $form->textarea('ship_data', __('Ship data'));
-        $form->switch('closed', __('Closed'));
-        $form->switch('reviewed', __('Reviewed'));
-        $form->textarea('remark', __('Remark'));
-
+        $form->text('no', '订单流水号');
+        $form->select('ship_status', '物流状态')->options(Order::$shipStatusMap);
+        $form->text('user.name', '下单员')->readonly();
+        $form->text('fans_name', '客户')->readonly();
+        $form->date('datetime', '下单时间')->default(date('Y-m-d'))->readonly();
+        $form->text('payment_method', '支付方式')->readonly();
+        $form->text('phone_number', '客户电话')->readonly();
+        $form->currency('prepayments', '预付金额')->symbol('￥')->readonly();
+        $form->currency('total_amount','总金额')->symbol('￥')->readonly();
+        $form->textarea('remark', '备注')->readonly();
         return $form;
     }
 }

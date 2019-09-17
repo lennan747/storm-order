@@ -21,9 +21,9 @@ class OrdersImport implements ToCollection
                 ['no', $row[0]],
                 ['ship_status', Order::SHIP_STATUS_PENDING]
             ])->update([
-                'ship_data' => json_encode(['LogisticCode' => $row[1], 'ShipperCode' => 'YTO']),
+                'ship_data'   => json_encode(['LogisticCode' => $row[1], 'ShipperCode' => 'YTO']),
                 'ship_status' => Order::SHIP_STATUS_DELIVERED,
-                'ship_date'=> Carbon::now()
+                'ship_date'   => Carbon::now()
             ]);
         }
     }

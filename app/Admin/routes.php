@@ -23,6 +23,8 @@ Route::group([
     // 订单管理
     $router->get('orders', 'OrdersController@index')->name('admin.orders.index');;
     $router->get('orders/{id}', 'OrdersController@show')->name('admin.orders.show');
+    $router->get('orders/{id}/edit', 'OrdersController@edit')->name('admin.orders.edit');
+    $router->put('orders/{id}', 'OrdersController@update')->name('admin.orders.update');
 
     // 支付管理
     $router->get('payments', 'PaymentsController@index')->name('admin.payments.index');

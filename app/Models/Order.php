@@ -127,4 +127,13 @@ class Order extends Model
         // 按照创建时间排序
         return $query->orderBy('created_at', 'desc');
     }
+
+//    public function getShipDataAttribute($ship_data){
+//        return array_values(json_decode($ship_data,true)?:[]);
+//    }
+//
+//    public function setShipDataAttribute($ship_data)
+//    {
+//        $this->attributes['ship_data'] = json_encode(array_values($ship_data));
+//    }
 }

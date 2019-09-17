@@ -210,6 +210,22 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="express" class="col-md-4 col-form-label text-md-right">邮寄方式</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="express" required>
+                                        <option value="YTO" {{ $order->ship_data['ShipperCode'] == 'YTO'? 'selected' : '' }}>圆通速递</option>
+                                        <option value="SF" {{ $order->ship_data['ShipperCode'] == 'SF'? 'selected' : '' }}>顺丰快递</option>
+                                        <option value="YD" {{ $order->ship_data['ShipperCode'] == 'YD'? 'selected' : '' }}>韵达快递</option>
+                                    </select>
+                                    @error('express')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="channel" class="col-md-4 col-form-label text-md-right">进线渠道</label>
                                 <div class="col-md-6">
                                     <input id="channel" type="text" class="form-control" name="channel" value="{{ old('channel' ,$order->channel) }}" required>

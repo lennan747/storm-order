@@ -1,4 +1,3 @@
-
 <div class="box">
     <div class="box-header with-border">
         <h3 class="box-title">订单基本信息</h3>
@@ -125,34 +124,40 @@
 <!--
 已发货，可查看物流状态
 -->
-@if(!empty($orderInfo->ship_data))
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">物流基本信息</h3>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">物流基本信息</h3>
 
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
+    </div>
 
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table class="table table-striped">
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <td>物流公司</td>
+                    <td>
+                        {{ $express[$orderInfo->ship_data['ShipperCode']] }}
+                    </td>
+                </tr>
+                @if(isset($orderInfo->ship_data['Traces']) && !is_null($orderInfo->ship_data['Traces']))
                     @foreach($orderInfo->ship_data['Traces'] as $traces)
                         <tr>
                             <td width="200px">{{ $traces['AcceptTime'] }}</td>
                             <td>{{ $traces['AcceptStation'] }}</td>
                         </tr>
                     @endforeach
-                </table>
-            </div>
-            <!-- /.table-responsive -->
+                @endif
+            </table>
         </div>
-        <!-- /.box-body -->
     </div>
-@endif
+    <!-- /.box-body -->
+</div>
+
 
 

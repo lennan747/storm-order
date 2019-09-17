@@ -9,7 +9,7 @@ use App\Imports\OrdersImport;
 
 class ImportOrder extends Action
 {
-    public $name = '导入订单面单列表';
+    public $name = '导入圆通订单面单列表';
 
     protected $selector = '.import-post';
 
@@ -31,7 +31,7 @@ class ImportOrder extends Action
     public function html()
     {
         return <<<HTML
-        <a class="btn btn-sm btn-default import-post"><i class="fa fa-upload"></i>导入订单面单列表</a>
+        <a class="btn btn-sm btn-default import-post"><i class="fa fa-upload"></i>导入圆通订单面单列表</a>
 HTML;
     }
 }

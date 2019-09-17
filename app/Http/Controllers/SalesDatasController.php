@@ -27,23 +27,23 @@ class SalesDatasController extends Controller
 
     public function store(Request $request){
         $user = $request->user();
-
-        $messages = [
-            'unique' => $request->sales_time.'日进线数据已经存在',
-        ];
-
-        $validator = Validator::make($request->all(),[
-            'sales_time' => [
-                'required',
-                Rule::unique('sales_datas')->where(function ($query) use ($user){
-                    return $query->where('user_id', $user->id);
-                })
-            ]
-        ],$messages);
-
-        if ($validator->fails()) {
-            return redirect('sales/create')->withErrors($validator)->withInput();
-        }
+//
+//        $messages = [
+//            'unique' => $request->sales_time.'日进线数据已经存在',
+//        ];
+//
+//        $validator = Validator::make($request->all(),[
+//            'sales_time' => [
+//                'required',
+//                Rule::unique('sales_datas')->where(function ($query) use ($user){
+//                    return $query->where('user_id', $user->id);
+//                })
+//            ]
+//        ],$messages);
+//
+//        if ($validator->fails()) {
+//            return redirect('sales/create')->withErrors($validator)->withInput();
+//        }
 
         $salesData = new SalesData([
             'sales_time'         => $request->sales_time,

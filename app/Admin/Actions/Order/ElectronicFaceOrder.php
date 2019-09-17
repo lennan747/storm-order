@@ -37,22 +37,24 @@ class ElectronicFaceOrder extends BatchAction
         $rows[] = $this->headingsYw;
         foreach ($collection as $item)
         {
-            $row['no'] = $item->no;
-            $row['goods_name'] = '';
-            $row['goods_number'] = '';
-            $row['fans_name'] = $item->fans_name;
-            $row['address'] = $item->address['province'].$item->address['city'].$item->address['district'].$item->address['address'];
-            $row['phone_number'] = $item->phone_number;
-            $row['send_name'] = '杨小星';
-            $row['send_phone'] = '13677344771';
-            $row['send_address'] = '湖南省长沙市岳麓区新长海中心';
-            $row['send_postcode'] = '';
-            $row['collection'] = $item->total_amount - $item->prepayments;
-            $row['remark'] = '口味:'.$item->taste.'数量:'.$item->quantity.'其他：'.$item->remark;
-            $row['postcode'] = '';
-            $row['tel'] = '';
-            $row['insurance_price'] = '';
-            $rows[] = $row;
+            if($item['ship_data']['ShipperCode'] == 'YTO'){
+                $row['no']                    = $item->no;
+                $row['goods_name']            = '';
+                $row['goods_number']          = '';
+                $row['fans_name']             = $item->fans_name;
+                $row['address']               = $item->address['province'].$item->address['city'].$item->address['district'].$item->address['address'];
+                $row['phone_number']          = $item->phone_number;
+                $row['send_name']             = '杨小星';
+                $row['send_phone']            = '13677344771';
+                $row['send_address']          = '湖南省长沙市岳麓区新长海中心';
+                $row['send_postcode']         = '';
+                $row['collection']            = $item->total_amount - $item->prepayments;
+                $row['remark']                = '口味:'.$item->taste.'数量:'.$item->quantity.'其他：'.$item->remark;
+                $row['postcode']              = '';
+                $row['tel']                   = '';
+                $row['insurance_price']       = '';
+                $rows[] = $row;
+            }
         }
         $export = new InvoicesExport($rows);
         $filePath = 'public/'.$this->fileName;
@@ -64,7 +66,7 @@ class ElectronicFaceOrder extends BatchAction
     public function name()
     {
         return <<<HTML
-        <a class="btn btn-sm btn-default electronic-face-order"><i class="fa fa-download"></i>导出订单面单列表</a>
+        <a class="btn btn-sm btn-default electronic-face-order"><i class="fa fa-download"></i>导出圆通订单面单列表</a>
 HTML;
     }
 
