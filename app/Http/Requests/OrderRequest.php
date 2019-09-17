@@ -26,7 +26,7 @@ class OrderRequest extends Request
                         'province'       => 'required|max:10',
                         'city'           => 'required|max:10',
                         'district'       => 'required|max:10',
-                        'address'        => 'required|max:100',
+                        'address'        => 'required|max:200',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
                         'quantity'       => 'nullable|numeric'
@@ -44,7 +44,7 @@ class OrderRequest extends Request
                         'province'       => 'required|max:10',
                         'city'           => 'required|max:10',
                         'district'       => 'required|max:10',
-                        'address'        => 'required|max:100',
+                        'address'        => 'required|max:200',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
                         'quantity'       => 'nullable|numeric'

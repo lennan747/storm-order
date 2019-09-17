@@ -64,6 +64,7 @@ class SalesDatasController extends Controller
     {
         $user = $request->user();
         $salesData->user()->associate($user);
+        // 获取今日时间
         // 当前进线操作日志
         $mark = $salesData->mark;
         $mark[] = array_except($salesData->toArray(),['id','user_id','sales_time','mark','created_at','user']);
