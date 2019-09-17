@@ -145,7 +145,7 @@
                         {{ $express[$orderInfo->ship_data['ShipperCode']] }}
                     </td>
                 </tr>
-                @if(isset($orderInfo->ship_data['Traces']) && !is_null($orderInfo->ship_data['Traces']))
+                @if(isset($orderInfo->ship_data['Traces']) && $orderInfo->ship_data['Traces'] != null && !empty($orderInfo->ship_data['Traces']))
                     @foreach($orderInfo->ship_data['Traces'] as $traces)
                         <tr>
                             <td width="200px">{{ $traces['AcceptTime'] }}</td>

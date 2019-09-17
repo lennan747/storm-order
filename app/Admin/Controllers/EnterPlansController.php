@@ -15,7 +15,7 @@ class EnterPlansController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\EnterPlan';
+    protected $title = '进线计划';
 
     /**
      * Make a grid builder.
@@ -25,11 +25,19 @@ class EnterPlansController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new EnterPlan);
+        $grid->filter(function ($filter){
+            $filter->disableIdFilter();
+            //$filter->like('enter_time', '进线时间');
+            $filter->where(function ($query) {
+                $query->where('enter_time', 'like', "%{$this->input}%")
+                    ->orWhere('id', 1);
+            }, '进线时间');
+        });
 
         $grid->column('id', __('Id'));
         $grid->column('enter_time', '进线时间')->display(function (){
             return $this->id == 1 ? '微信号': $this->enter_time->format('Y-m-d');
-        });
+        })->sortable();
         $grid->column('a1', __('1'))->editable();
         $grid->column('a2', __('1A'))->editable();
         $grid->column('a3', __('2'))->editable();
