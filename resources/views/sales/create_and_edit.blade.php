@@ -62,10 +62,11 @@
                                             type="text"
                                             class="form-control"
                                             name="sales_time"
-                                            id="datetimepicker"
+                                            @if(!$salesData->id) id="datetimepicker" @endif
                                             autocomplete="off"
                                             value="{{ old('sales_time',$salesData ->id ? $salesData->sales_time: '') }}"
                                             required
+                                            @if($salesData->id) readonly @endif
                                     >
                                     @error('sales_time')
                                     <div class="mb-3 bg-danger text-white">
