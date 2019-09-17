@@ -12,11 +12,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('orders.create') }}">添加</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">列表</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('orders.create') }}">订单添加</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('orders.index') }}">订单列表</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="{{ route('sales.create') }}">销售数据添加</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('sales.index') }}">销售数据列表</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('sales.create') }}">进线日志添加</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('sales.index') }}">进线日志列表</a></li>
                 <!--
                     <li class="nav-item"><a class="nav-link" href="">列表</a></li>
                     <li class="nav-item"><a class="nav-link" href="">统计</a></li>
