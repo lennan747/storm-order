@@ -36,6 +36,7 @@ class OrdersController extends AdminController
             $filter->disableIdFilter();
             $filter->like('name', '客户姓名');
             $filter->like('phone_number', '客户电话');
+            $filter->like('transaction_datetime', '成交时间');
             $filter->where(function ($query) {
                 $query->whereHas('user', function ($query) {
                     $query->where('name', 'like', "%{$this->input}%");
