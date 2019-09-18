@@ -16,7 +16,7 @@ trait OrdersLogistics
 
     public function deliveredOrders()
     {
-        // 获取正在发货的
+        // 获取正在发货的订单
         // 或者
         return Order::query()
             ->where('ship_status',Order::SHIP_STATUS_DELIVERED)
@@ -34,9 +34,12 @@ trait OrdersLogistics
             if($order->ship_data == null) {
                 continue;
             }
-            if($order->ship_data['LogisticCode'] == null) {
+
+            // 物流订单号为空不查询
+            if($order->ship_data['LogisticCode'] == null || $order->ship_data['LogisticCode'] == '') {
                 continue;
             }
+
             // 没有的话就不调用
             dispatch(new UpdateLogistics($order));
         }
