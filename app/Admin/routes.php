@@ -40,7 +40,6 @@ Route::group([
     // 销售管理
     $router->resource('sales-datas', SalesDatasController::class);
 
-    // 微信公众号
-    //$router->resource('wx-qrcodes', WxQrcodesController::class);
-    //$router->resource('plans', PlanController::class);
+    // 微信号
+    $router->resource('wechats', WechatsController::class);
 });

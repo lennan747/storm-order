@@ -148,11 +148,16 @@ class OrdersController extends Controller
      */
     public function logistics(Request $request,Order $order)
     {
-        $this->authorize('logistics', $order);
         $orderSn = $order->no;
         $expressCode = $order->ship_data['ShipperCode'];
         $expressSn = $order->ship_data['LogisticCode'];
-        $ship_data = \Jormin\KDNiao\KDNiao::queryExpressInfo($orderSn, $expressCode, $expressSn);
+        // 顺丰快递要手机号后4位
+        if($expressCode == 'SF'){
+            $customerName = 8422;
+        }else{
+            $customerName = null;
+        }
+        $ship_data = \Jormin\KDNiao\KDNiao::queryExpressInfo($orderSn, $expressCode, $expressSn, $customerName);
         $order->user()->associate($request->user());
         // 暂时无法查到信息
         if($ship_data['State'] == 0){

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wechat extends Model
 {
+
+    protected $table = 'wechat';
     //
     public $fillable = [
         'code',
@@ -14,4 +16,9 @@ class Wechat extends Model
         'qrcode',
         'sort'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
