@@ -25,4 +25,9 @@ class Wechat extends Model
     public function sales_data(){
         return $this->belongsToMany(SalesData::class);
     }
+
+
+    public function wechat_to_channel(){
+        return $this->hasMany(WechatToChannel::class,'id','channel_assgin_id');
+    }
 }

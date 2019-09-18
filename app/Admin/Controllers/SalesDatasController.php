@@ -2,11 +2,14 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Channel;
 use App\Models\SalesData;
+use App\Models\WechatToChannel;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
 
 class SalesDatasController extends AdminController
 {
@@ -31,8 +34,20 @@ class SalesDatasController extends AdminController
         $grid->column('wechat.sort', '排序')->sortable();
         $grid->column('user.name', '下单员')->sortable();
         $grid->column('wechat.account', '进线微信号');
-        $grid->column('sales_time', '销售日期');
-        $grid->column('channel', '进线渠道');
+        $grid->column('sales_time', '进线日期');
+        $grid->column('channels', '进线渠道')->display(function (){
+            if($this->sales_time && $this->wechat_id){
+                $channel_id = DB::table('wechat_to_channels')->where([
+                    ['datetime', '=', $this->sales_time],
+                    ['wechat_id', '=', $this->wechat_id],
+                ])->value('channel_id');
+                if($channel_id !== null){
+                    return \DB::table('channels')->where('id',$channel_id)->value('code');
+                }
+                return '';
+            }
+            return '';
+        });
         $grid->column('enter_number','进线人数');
         $grid->column('repay_number', '回复人数');
         $grid->column('delete_number', '删除人数');

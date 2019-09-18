@@ -46,6 +46,7 @@ class SalesDatasController extends Controller
 //        if ($validator->fails()) {
 //            return redirect('sales/create')->withErrors($validator)->withInput();
 //        }
+
         $salesData = new SalesData([
             'sales_time'         => $request->sales_time,
             'channel'            => $request->channel,

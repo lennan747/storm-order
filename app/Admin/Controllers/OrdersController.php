@@ -52,6 +52,19 @@ class OrdersController extends AdminController
         $grid->no('订单流水号');
         $grid->fans_name('客户姓名');
         $grid->column('wechat.account','进线微信号');
+        $grid->column('channels', '进线渠道')->display(function (){
+            if($this->transaction_datetime && $this->wechat_id){
+                $channel_id = \DB::table('wechat_to_channels')->where([
+                    ['datetime', '=', $this->transaction_datetime],
+                    ['wechat_id', '=', $this->wechat_id],
+                ])->value('channel_id');
+                if($channel_id !== null){
+                    return \DB::table('channels')->where('id',$channel_id)->value('code');
+                }
+                return '';
+            }
+            return '';
+        });
         $grid->prepayments('预付款')->sortable();
         $grid->total_amount('订单金额')->sortable();
         $grid->column('unpaid_amount','未付金额')->display(function (){

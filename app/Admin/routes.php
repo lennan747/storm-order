@@ -42,4 +42,8 @@ Route::group([
 
     // 微信号
     $router->resource('wechats', WechatsController::class);
+
+    // 渠道
+    $router->resource('channels', ChannelsController::class);
+    $router->resource('channel-assgins', ChannelAssginsController::class);
 });
