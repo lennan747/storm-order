@@ -56,6 +56,24 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="wechat_id" class="col-md-4 col-form-label text-md-right">进线微信号</label>
+                                <div class="col-md-6">
+                                    <select name="wechat_id" class="form-control" id="wechat_id">
+                                    @foreach(Auth::user()->wechat as $wechat)
+                                        <option value="{{ $wechat->id }}"
+                                                {{ $salesData->wechat_id == $wechat->id ? 'selected' :'' }}
+                                        >{{ $wechat->account }}</option>
+                                    @endforeach
+                                    </select>
+                                    @error('wechat_id')
+                                    <div class="mb-3 bg-danger text-white">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="sales_time" class="col-md-4 col-form-label text-md-right">销售日期</label>
                                 <div class="col-md-6">
                                     <input

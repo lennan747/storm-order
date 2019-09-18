@@ -26,6 +26,7 @@
                             <tr>
                                 <th scope="col">日期</th>
                                 <th scope="col">渠道号</th>
+                                <th scope="col">进线微信号</th>
                                 <th scope="col">进线人数</th>
                                 <th scope="col">回复人数</th>
                                 <th scope="col">删粉人数</th>
@@ -41,6 +42,12 @@
                                 <tr>
                                     <th scope="row">{{ $salesData->sales_time }}</th>
                                     <td>{{ $salesData->channel }}</td>
+                                    <td>@foreach($weachts as $wechat)
+                                         @if($wechat->id == $salesData->wechat_id)
+                                                {{ $wechat->account }}
+                                         @endif
+                                        @endforeach
+                                    </td>
                                     <td>{{ $salesData->enter_number }}</td>
                                     <td>{{ $salesData->repay_number }}</td>
                                     <td>{{ $salesData->delete_number }}</td>

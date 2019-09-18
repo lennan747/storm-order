@@ -16,7 +16,7 @@ class WechatsController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Wechat';
+    protected $title = '微信号';
 
     /**
      * Make a grid builder.

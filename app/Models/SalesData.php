@@ -17,7 +17,8 @@ class SalesData extends Model
         'transaction_amount',
         'sales_time',
         'transaction_number',
-        'mark'
+        'mark',
+        'wechat_id'
     ];
 
     protected $casts = [
@@ -30,4 +31,7 @@ class SalesData extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function wechat(){
+        return $this->belongsTo(Wechat::class);
+    }
 }

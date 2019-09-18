@@ -47,4 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(SalesData::class);
     }
+
+    public function wechat(){
+        return $this->hasMany(Wechat::class);
+    }
 }

@@ -83,6 +83,7 @@ class OrdersController extends Controller
             'age'                            => $request->input('age'),
             'transaction_datetime'           => $request->input('transaction_datetime'),
             'ship_data'                      => ['ShipperCode' => $request->input('express')],
+            'wechat_id'                      => $request->input('wechat_id'),
         ]);
         $order->user()->associate($user);
         $order->save();
@@ -134,6 +135,7 @@ class OrdersController extends Controller
             'age'                        => $request->input('age'),
             'transaction_datetime'       => $request->input('transaction_datetime'),
             'ship_data'                  => ['ShipperCode' => $request->input('express')],
+            'wechat_id'                      => $request->input('wechat_id'),
         ]);
 
         return redirect()->route('orders.edit',['order' => $order->id])->with('status', '更新订单成功');

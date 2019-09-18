@@ -21,4 +21,8 @@ class Wechat extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sales_data(){
+        return $this->belongsToMany(SalesData::class);
+    }
 }

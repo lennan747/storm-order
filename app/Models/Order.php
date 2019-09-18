@@ -37,7 +37,8 @@ class Order extends Model
         'channel',
         'taste',
         'transaction_datetime',
-        'age'
+        'age',
+        'wechat_id'
     ];
 
     // 这是一个属性转换器
@@ -61,6 +62,10 @@ class Order extends Model
     public function paymentMethod()
     {
         return $this->belongsTo(Payment::class,'payment_method','id');
+    }
+
+    public function wechat(){
+        return $this->belongsTo(Wechat::class);
     }
 
     protected static function boot()
