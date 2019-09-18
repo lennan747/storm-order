@@ -30,7 +30,8 @@ class OrderRequest extends Request
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
                         'quantity'       => 'nullable|numeric',
-                        'express'        => 'required'
+                        'express'        => 'required',
+                        'wechat_id'      => 'required|numeric'
                     ];
                 }
             // UPDATE
@@ -49,7 +50,8 @@ class OrderRequest extends Request
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
                         'quantity'       => 'nullable|numeric',
-                        'express'        => 'required'
+                        'express'        => 'required',
+                        'wechat_id'      => 'required|numeric'
                     ];
                 }
             case 'PATCH':

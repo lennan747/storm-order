@@ -51,8 +51,7 @@ class OrdersController extends AdminController
         $grid->id('ID');
         $grid->no('订单流水号');
         $grid->fans_name('客户姓名');
-        $grid->datetime('客户进粉时间')->sortable();
-        $grid->transaction_datetime('成交时间')->sortable();
+        $grid->column('wechat.account','进线微信号');
         $grid->prepayments('预付款')->sortable();
         $grid->total_amount('订单金额')->sortable();
         $grid->column('unpaid_amount','未付金额')->display(function (){
@@ -64,7 +63,8 @@ class OrdersController extends AdminController
         $grid->closed('订单状态')->display(function ($closed){
             return $closed ? '已关闭' : '进行中';
         });
-
+        $grid->datetime('客户进粉时间')->sortable();
+        $grid->transaction_datetime('成交时间')->sortable();
         $grid->created_at('下单时间')->sortable();
         $grid->user_id('下单员')->display(function ($userId){
             return User::find($userId)->name;

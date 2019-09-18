@@ -13,7 +13,9 @@ class SalesDatasController extends Controller
     public function index(Request $request)
     {
         $salesDatas = $request->user()->salesData()->orderBy('sales_time','desc')->paginate(10);
-        return view('sales.index',compact('salesDatas'));
+        $weachts = $request->user()->wechat()->get();
+        //dd($weachts);
+        return view('sales.index',compact('salesDatas','weachts'));
     }
 
     public function create(SalesData $salesData)
@@ -44,15 +46,15 @@ class SalesDatasController extends Controller
 //        if ($validator->fails()) {
 //            return redirect('sales/create')->withErrors($validator)->withInput();
 //        }
-
         $salesData = new SalesData([
             'sales_time'         => $request->sales_time,
             'channel'            => $request->channel,
             'enter_number'       => $request->enter_number,
             'repay_number'       => $request->repay_number,
             'delete_number'      => $request->delete_number,
-            'transaction_amount' =>$request->transaction_amount,
-            'transaction_number' => $request->transaction_number
+            'transaction_amount' => $request->transaction_amount,
+            'transaction_number' => $request->transaction_number,
+            'wechat_id'          => $request->wechat_id,
         ]);
 
         $salesData->user()->associate($user);
@@ -76,7 +78,8 @@ class SalesDatasController extends Controller
             'delete_number'      => $request->delete_number,
             'transaction_amount' => $request->transaction_amount,
             'transaction_number' => $request->transaction_number,
-            'mark'               => $mark
+            'mark'               => $mark,
+            'wechat_id'          => $request->wechat_id,
         ]);
 
         return redirect()->route('sales.index');

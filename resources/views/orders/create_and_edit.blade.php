@@ -238,6 +238,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="wechat_id" class="col-md-4 col-form-label text-md-right">成交微信号</label>
+                                <div class="col-md-6">
+                                    <select name="wechat_id" class="form-control" id="wechat_id">
+                                        @foreach(Auth::user()->wechat as $wechat)
+                                            <option
+                                                    value="{{ $wechat->id }}"
+                                                    {{ $order->wechat_id == $wechat->id ? 'selected' :'' }}
+                                            >{{ $wechat->account }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="taste" class="col-md-4 col-form-label text-md-right">口味</label>
                                 <div class="col-md-6">
                                     <input id="taste" type="text" class="form-control" name="taste" value="{{ old('taste' ,$order->taste) }}" required>

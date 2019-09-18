@@ -27,7 +27,10 @@ class SalesDatasController extends AdminController
         $grid = new Grid(new SalesData);
 
         $grid->column('id', __('Id'));
+        $grid->column('wechat.code', '微信编号')->sortable();
+        $grid->column('wechat.sort', '排序')->sortable();
         $grid->column('user.name', '下单员')->sortable();
+        $grid->column('wechat.account', '进线微信号');
         $grid->column('sales_time', '销售日期');
         $grid->column('channel', '进线渠道');
         $grid->column('enter_number','进线人数');
