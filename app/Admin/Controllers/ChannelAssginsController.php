@@ -10,6 +10,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Admin;
 
 class ChannelAssginsController extends AdminController
 {
@@ -48,8 +49,6 @@ class ChannelAssginsController extends AdminController
         $grid->column('type', __('粉丝类型'));
         $grid->column('score', __('渠道评分'));
         $grid->column('mark', __('备注'));
-//        $grid->column('created_at', __('Created at'));
-//        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -87,11 +86,14 @@ class ChannelAssginsController extends AdminController
     protected function form()
     {
         $form = new Form(new ChannelAssgin);
-
-        //$form->number('channel_id', __('Channel id'));
-        $form->select('channel_id','渠道号')->options(Channel::all()->pluck('code','id')->toArray());
+        // 渠道编号
+//        $form->text('code','渠道编号');
+        // 渠道公司
+        $form->text('name', '渠道公司名称');
+        $form->html('<div id="show_channel"></div>');
+        $form->html('<button id="check_channel" type="button">检查渠道信息</button>');
+        $form->text('channel_id','渠道号')->rules('required')->readonly();
         $form->date('datetime','派单时间')->default(date('Y-m-d'));
-        //$form->text('wechat', __('Wechat'));
         $form->multipleSelect('wechat','微信号')->options(Wechat::all()->pluck('account', 'id')->toArray());
         $form->text('company', __('派单人'));
         $form->text('details', __('派单详情'));
@@ -99,6 +101,9 @@ class ChannelAssginsController extends AdminController
         $form->text('type', __('粉丝类型'));
         $form->number('score', __('渠道评分'));
         $form->textarea('mark', __('备注'));
+
+//        // 在表单提交前调用
+        $form->ignore(['code', 'name']);
 
         //保存后回调
         $form->saved(function (Form $form) {
@@ -115,6 +120,12 @@ class ChannelAssginsController extends AdminController
             }
         });
 
+        $form->footer(function ($footer) {
+            // 去掉`重置`按钮
+            $footer->disableReset();
+        });
+
+        Admin::js('/js/custom.js');
         return $form;
     }
 }

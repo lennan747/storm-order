@@ -68,4 +68,46 @@ class ChannelsController extends AdminController
 
         return $form;
     }
+
+    public function check_channel()
+    {
+        //$code = request()->code;
+        $name = request()->name;
+
+//        if(!$name){
+//            // 检查
+//            $channel = Channel::query()
+//                ->where('code',$code)
+//                ->get()
+//                ->toArray();
+//        }else{
+//            // 检查
+//            $channel = Channel::query()
+//                ->where('code',$code)
+//                ->orWhere('name','like',"%{$name}%")
+//                ->get()
+//                ->toArray();
+//        }
+
+        // 检查
+        $channel = Channel::query()
+            ->where('name','like',"%{$name}%")
+            ->get()
+            ->toArray();
+
+        return response()->json($channel);
+
+        //return response()->
+    }
+
+
+    public function add_channel(){
+        $name = request()->name;
+        $channel = new Channel([
+            'code' => str_random(20),
+            'name' => $name
+        ]);
+        $channel->save();
+        return response()->json(['status' => true,'id' => $channel->id]);
+    }
 }

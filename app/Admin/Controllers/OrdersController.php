@@ -58,10 +58,10 @@ class OrdersController extends AdminController
                     ['datetime', '=', $this->transaction_datetime],
                     ['wechat_id', '=', $this->wechat_id],
                 ])->value('channel_id');
-                if($channel_id !== null){
-                    return \DB::table('channels')->where('id',$channel_id)->value('code');
-                }
-                return '';
+//                if($channel_id !== null){
+//                    return \DB::table('channels')->where('id',$channel_id)->value('code');
+//                }
+                return $channel_id;
             }
             return '';
         });

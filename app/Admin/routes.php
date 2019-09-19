@@ -45,5 +45,7 @@ Route::group([
 
     // 渠道
     $router->resource('channels', ChannelsController::class);
+    $router->post('channels/check_channel','ChannelsController@check_channel');
+    $router->post('channels/add_channel','ChannelsController@add_channel');
     $router->resource('channel-assgins', ChannelAssginsController::class);
 });

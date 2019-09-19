@@ -53,8 +53,8 @@
                                     <td>{{ $salesData->delete_number }}</td>
                                     <td>{{ $salesData->transaction_amount }}</td>
                                     <td>{{ $salesData->transaction_number }}</td>
-                                    <td>{{ number_format($salesData->delete_number/$salesData->enter_number,4)*100 }}%</td>
-                                    <td>{{ number_format($salesData->repay_number/$salesData->enter_number,4)*100 }}%</td>
+                                    <td>{{ $salesData->enter_number ? 0 : number_format($salesData->delete_number/$salesData->enter_number,4)*100 }}%</td>
+                                    <td>{{ $salesData->enter_number ? 0 : number_format($salesData->repay_number/$salesData->enter_number,4)*100 }}%</td>
                                     <td>
                                         <a href="{{ route('sales.edit', ['sale' => $salesData->id]) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">修改</a>
                                     </td>

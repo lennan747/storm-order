@@ -37,14 +37,17 @@ class SalesDatasController extends AdminController
         $grid->column('sales_time', '进线日期');
         $grid->column('channels', '进线渠道')->display(function (){
             if($this->sales_time && $this->wechat_id){
-                $channel_id = DB::table('wechat_to_channels')->where([
+                $channel_id = \DB::table('wechat_to_channels')->where([
                     ['datetime', '=', $this->sales_time],
                     ['wechat_id', '=', $this->wechat_id],
                 ])->value('channel_id');
-                if($channel_id !== null){
-                    return \DB::table('channels')->where('id',$channel_id)->value('code');
-                }
-                return '';
+
+//                if($channel_id !== null){
+//                    return '渠道号<span style="color: red">'
+//                        .$channel_id.'</span>渠道公司:'
+//                        .\DB::table('channels')->where('id',$channel_id)->value('name');
+//                }
+                return $channel_id;
             }
             return '';
         });
@@ -54,11 +57,11 @@ class SalesDatasController extends AdminController
         $grid->column('transaction_amount','交易金额');
         $grid->column('transaction_number', '交易订单数');
         $grid->column('delete_rate','删粉率')->display(function (){
-            return number_format($this->delete_number/$this->enter_number,4)*100 .'%';
+            return $this->enter_number == 0 ? 0 : number_format($this->delete_number/$this->enter_number,4)*100 .'%';
         });
 
         $grid->column('repay_rate','回复率')->display(function (){
-            return number_format($this->repay_number/$this->enter_number,4)*100 .'%';
+            return $this->enter_number == 0 ? 0 : number_format($this->repay_number/$this->enter_number,4)*100 .'%';
         });
         //$grid->column('created_at', );
         $grid->column('updated_at','上次更新时间');
