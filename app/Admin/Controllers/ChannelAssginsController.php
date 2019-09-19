@@ -30,15 +30,15 @@ class ChannelAssginsController extends AdminController
     {
         $grid = new Grid(new ChannelAssgin);
 
-        //$grid->column('id', __('Id'));
-        $grid->column('channel.code', __('渠道编号'));
+        $grid->column('id', __('渠道编号'));
+        //$grid->column('channel.code', __('渠道编号'));
         $grid->column('channel.name', __('渠道公司名称'));
         $grid->column('datetime', __('派单时间'));
-        $grid->column('wechat', __('微信号'))->display(function ($wechat){
+        $grid->column('wechat', __('微信编号'))->display(function ($wechat){
             //$this->wechat
             $html = "";
             foreach ($wechat as $value){
-                $account = Wechat::query()->where('id',$value)->value('account');
+                $account = Wechat::query()->where('id',$value)->value('code');
                 $html .= "<span class='label label-warning margin-r-5'>{$account}</span>";
             }
             return $html;
@@ -87,7 +87,7 @@ class ChannelAssginsController extends AdminController
     {
         $form = new Form(new ChannelAssgin);
         // 渠道编号
-//        $form->text('code','渠道编号');
+        //$form->text('code','渠道编号');
         // 渠道公司
         $form->text('name', '渠道公司名称');
         $form->html('<div id="show_channel"></div>');

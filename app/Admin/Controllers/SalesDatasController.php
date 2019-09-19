@@ -28,13 +28,13 @@ class SalesDatasController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new SalesData);
-
-        $grid->column('id', __('Id'));
+        $grid->model()->orderby('sales_time','desc');
+        //$grid->column('id', __('Id'));
         $grid->column('wechat.code', '微信编号')->sortable();
-        $grid->column('wechat.sort', '排序')->sortable();
+        //$grid->column('wechat.sort', '排序')->sortable();
         $grid->column('user.name', '下单员')->sortable();
         $grid->column('wechat.account', '进线微信号');
-        $grid->column('sales_time', '进线日期');
+        $grid->column('sales_time', '进线日期')->sortable();
         $grid->column('channels', '进线渠道')->display(function (){
             if($this->sales_time && $this->wechat_id){
                 $channel_id = \DB::table('wechat_to_channels')->where([

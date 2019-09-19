@@ -26,7 +26,7 @@ class ChannelsController extends AdminController
     {
         $grid = new Grid(new Channel);
 
-        //$grid->column('id', __('Id'));
+        $grid->column('id', __('Id'));
         $grid->column('code', __('渠道编号'));
         $grid->column('name', __('渠道公司名称'));
 //        $grid->column('created_at', __('Created at'));

@@ -28,10 +28,10 @@ class SalesData extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->orderBy('name','asc');
     }
 
     public function wechat(){
-        return $this->belongsTo(Wechat::class);
+        return $this->belongsTo(Wechat::class)->orderBy('code','asc');
     }
 }
