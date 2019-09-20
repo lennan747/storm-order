@@ -72,11 +72,11 @@ class OrdersController extends AdminController
         });
         $grid->ship_status('物流状态')->display(function ($shipStatus){
             if($shipStatus == '已发货'){
-                return '<span style="color: #880000;">.Order::$shipStatusMap[$shipStatus].</span>';
+                return '<span style="color: #880000;">'.Order::$shipStatusMap[$shipStatus].'</span>';
             }elseif ($shipStatus == '已收货'){
-                return '<span style="color: red;">.Order::$shipStatusMap[$shipStatus].</span>';
+                return '<span style="color: red;">'.Order::$shipStatusMap[$shipStatus].'</span>';
             }else{
-                return Order::$shipStatusMap[$shipStatus]
+                return Order::$shipStatusMap[$shipStatus];
             }
         });
         $grid->closed('订单状态')->display(function ($closed){
