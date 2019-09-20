@@ -94,7 +94,7 @@ class ChannelAssginsController extends AdminController
         $form->html('<button id="check_channel" type="button">检查渠道信息</button>');
         $form->text('channel_id','渠道号')->rules('required')->readonly();
         $form->date('datetime','派单时间')->default(date('Y-m-d'));
-        $form->multipleSelect('wechat','微信号')->options(Wechat::all()->pluck('account', 'id')->toArray());
+        $form->multipleSelect('wechat','微信号')->options(Wechat::all()->pluck('code', 'id')->toArray());
         $form->text('company', __('派单人'));
         $form->text('details', __('派单详情'));
         $form->decimal('price', __('万粉单价'));
