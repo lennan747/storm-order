@@ -53,7 +53,7 @@ class UpdateLogistics implements ShouldQueue
         {
             DB::table('orders')->where('id',$this->order->id)->update([
                 'ship_status' => 'received',
-                'closed'      => false,
+                'closed'      => true,
                 'ship_data'   => json_encode($logistics)
             ]);
         }
