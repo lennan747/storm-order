@@ -51,7 +51,7 @@ class OrdersController extends AdminController
         $grid->id('ID');
         $grid->no('订单流水号');
         $grid->fans_name('客户姓名');
-        $grid->column('wechat.account','进线微信号');
+        $grid->column('wechat.code','进线微信编号');
         $grid->column('channels', '进线渠道')->display(function (){
             if($this->transaction_datetime && $this->wechat_id){
                 $channel_id = \DB::table('wechat_to_channels')->where([
@@ -71,10 +71,16 @@ class OrdersController extends AdminController
              return $this['total_amount']-$this['prepayments'];
         });
         $grid->ship_status('物流状态')->display(function ($shipStatus){
-            return Order::$shipStatusMap[$shipStatus];
+            if($shipStatus == '已发货'){
+                return '<span style="color: #880000;">.Order::$shipStatusMap[$shipStatus].</span>';
+            }elseif ($shipStatus == '已收货'){
+                return '<span style="color: red;">.Order::$shipStatusMap[$shipStatus].</span>';
+            }else{
+                return Order::$shipStatusMap[$shipStatus]
+            }
         });
         $grid->closed('订单状态')->display(function ($closed){
-            return $closed ? '已关闭' : '进行中';
+            return $closed ? '已关闭' : '<span style="color: #0000FF;">进行中</span>';
         });
         $grid->datetime('客户进粉时间')->sortable();
         $grid->transaction_datetime('成交时间')->sortable();
