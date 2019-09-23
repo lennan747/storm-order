@@ -86,7 +86,7 @@ class EnterPlansController extends AdminController
 
         //$show->field('id', __('Id'));
         $show->field('enter_time', __('进线时间'));
-        $show->field('a1', __('微信号'));
+        $show->field('a1', __('1'));
         $show->field('a2', __('1A'));
         $show->field('a3', __('2'));
         $show->field('a4', __('2A'));
@@ -132,7 +132,7 @@ class EnterPlansController extends AdminController
         $form = new Form(new EnterPlan);
 
         $form->date('enter_time', __('进线时间'))->default(date('Y-m-d'));
-        $form->text('a1', __('微信号'));
+        $form->text('a1', __('1'));
         $form->text('a2', __('1A'));
         $form->text('a3', __('2'));
         $form->text('a4', __('2A'));
