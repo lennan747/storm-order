@@ -25,7 +25,7 @@ class OrderRequest extends Request
                         'total_amount'   => 'required|numeric',
                         'province'       => 'required|max:10',
                         'city'           => 'required|max:10',
-                        'district'       => 'required|max:50',
+                        'district'       => 'nullable|max:50',
                         'address'        => 'required|max:200',
                         'phone_number'   => 'required|regex:/^1[3456789][0-9]{9}$/',
                         'remark'         => 'nullable|max:100',
