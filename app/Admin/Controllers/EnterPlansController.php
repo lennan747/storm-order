@@ -2,11 +2,14 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\ChannelAssgin;
 use App\Models\EnterPlan;
+use App\Models\Wechat;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Arr;
 
 class EnterPlansController extends AdminController
 {
@@ -25,7 +28,7 @@ class EnterPlansController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new EnterPlan);
-        $grid->filter(function ($filter){
+        $grid->filter(function ($filter) {
             $filter->disableIdFilter();
             //$filter->like('enter_time', '进线时间');
             $filter->where(function ($query) {
@@ -34,43 +37,14 @@ class EnterPlansController extends AdminController
             }, '进线时间');
         });
 
-        //$grid->column('id', __('Id'));
-        $grid->column('enter_time', '进线时间')->display(function (){
-            return $this->id == 1 ? '微信号': $this->enter_time->format('Y-m-d');
-        })->sortable();
-        $grid->column('a1', __('1'))->editable();
-        $grid->column('a2', __('1A'))->editable();
-        $grid->column('a3', __('2'))->editable();
-        $grid->column('a4', __('2A'))->editable();
-        $grid->column('a5', __('3'))->editable();
-        $grid->column('a6', __('5'))->editable();
-        $grid->column('a7', __('10'))->editable();
-        $grid->column('a8', __('11'))->editable();
-        $grid->column('a9', __('11A'))->editable();
-        //$grid->column('a10', __('10A'))->editable();
-        $grid->column('a11', __('12'))->editable();
-        $grid->column('a12', __('13'))->editable();
-        $grid->column('a13', __('15'))->editable();
-        $grid->column('a14', __('16'))->editable();
-        $grid->column('a15', __('16A'))->editable();
-        $grid->column('a16', __('17'))->editable();
-        $grid->column('a17', __('18'))->editable();
-        $grid->column('a18', __('19'))->editable();
-//        $grid->column('a19', __('19'))->editable();
-//        $grid->column('a20', __('20'))->editable();
-//        $grid->column('a21', __('21'))->editable();
-//        $grid->column('a22', __('22'))->editable();
-//        $grid->column('a23', __('23'))->editable();
-//        $grid->column('a24', __('24'))->editable();
-//        $grid->column('a25', __('25'))->editable();
-//        $grid->column('a26', __('A26'))->editable();
-//        $grid->column('a27', __('A27'))->editable();
-//        $grid->column('a28', __('A28'))->editable();
-//        $grid->column('a29', __('A29'))->editable();
-//        $grid->column('a30', __('A30'))->editable();
-//        $grid->column('created_at', __('Created at'));
-//        $grid->column('updated_at', __('Updated at'));
-
+        $grid->column('datetime', '进线时间');
+        $wechats = Wechat::query()->orderBy('code','asc')->get()->toArray();
+        //dd($wechats);
+        foreach ($wechats as $v){
+            $grid->column($v['code'], $v['code'])->display(function () use ($v){
+                return '<a href="channel-assgins/17/edit" target="_blank">'.$this->{$v['code']}.'</a>';
+            });
+        }
         return $grid;
     }
 
@@ -164,5 +138,42 @@ class EnterPlansController extends AdminController
 //        $form->text('a30', __('A30'));
 
         return $form;
+    }
+
+
+    public function enter_data()
+    {
+        $wechats = Wechat::query()->get();
+        $chnnel_assgins = ChannelAssgin::query()->orderBy('datetime', 'desc')->get();
+        $res = [];
+        $i = 0;
+        $tag = [];
+        foreach ($chnnel_assgins as $key => $v) {
+            $datetime = $v['datetime']->toDateString();
+
+            if (empty($tag) || !isset($tag[$datetime])) {
+                $res[$i]['datetime'] = $datetime;
+                $res[$i]['info'] = $v;
+                $tag[$datetime] = $i;
+                $i = $i + 1;
+            }else{
+                $temp = $res[$tag[$datetime]]['info']['wechat'];
+                $temp = array_values(array_unique(array_merge($temp,$v['wechat'])));
+                $res[$tag[$datetime]]['info']['wechat'] = $temp;
+            }
+        }
+
+        foreach ($res as $k => $v) {
+            foreach ($wechats as $wechat) {
+                if (in_array($wechat['id'], $res[$k]['info']['wechat']) && $res[$k]['info']['mark']) {
+                    $res[$k][$wechat['code']] = $res[$k]['info']['mark'];
+                }else{
+                    $res[$k][$wechat['code']] = "";
+                }
+            }
+            unset($res[$k]['info']);
+        }
+
+        return response()->json($res);
     }
 }

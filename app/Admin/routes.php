@@ -35,6 +35,7 @@ Route::group([
     $router->get('payments/{payment}', 'PaymentsController@show')->name('admin.payments.show');
 
     // 进线管理
+    $router->get('enter-plans/enter_data','EnterPlansController@enter_data');
     $router->resource('enter-plans', EnterPlansController::class);
 
     // 销售管理

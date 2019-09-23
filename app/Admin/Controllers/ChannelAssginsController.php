@@ -33,7 +33,7 @@ class ChannelAssginsController extends AdminController
         $grid->column('id', __('渠道编号'));
         //$grid->column('channel.code', __('渠道编号'));
         $grid->column('channel.name', __('渠道公司名称'));
-        $grid->column('datetime', __('派单时间'));
+        $grid->column('datetime', __('派单时间'))->sortable();
         $grid->column('wechat', __('微信编号'))->display(function ($wechat){
             //$this->wechat
             $html = "";
