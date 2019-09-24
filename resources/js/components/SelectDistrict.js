@@ -49,6 +49,12 @@ Vue.component('select-district', {
             }
             // 将地区列表设为当前城市下的地区
             this.districts = addressData[newVal];
+            // 地级市
+            if(!this.districts){
+                this.districtId = '';
+                this.$emit('change', [this.provinces[this.provinceId], this.cities[this.cityId], '']);
+                return
+            }
             // 如果当前选中的地区不在当前城市下，则将选中地区清空
             if (!this.districts[this.districtId]) {
                 this.districtId = '';
@@ -57,7 +63,7 @@ Vue.component('select-district', {
         // 当选择的区发生改变时触发
         districtId() {
             // 触发一个名为 change 的 Vue 事件，事件的值就是当前选中的省市区名称，格式为数组
-            this.$emit('change', [this.provinces[this.provinceId], this.cities[this.cityId], this.districts[this.districtId]]);
+            this.$emit('change', [this.provinces[this.provinceId], this.cities[this.cityId], this.districtId ? this.districts[this.districtId] : '']);
         },
     },
     // 组件初始化时会调用这个方法

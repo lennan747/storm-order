@@ -11,6 +11,7 @@
 namespace App\Admin\Extensions;
 
 use Encore\Admin\Grid\Exporters\ExcelExporter;
+use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrdersExporter extends ExcelExporter
@@ -18,19 +19,22 @@ class OrdersExporter extends ExcelExporter
     protected $fileName = '订单列表.xls';
 
     protected $headingsYw = [
-        '用户名',
+        '进线公司',
         '进线日期',
-        '成交日期',
-        '进线渠道',
-        '详细地址',
-        '联系方式',
+        '日期',
         '盒数',
-        '定金',
+        '价格',
         '口味',
-        '尾款',
-        '发货日期',
-        '收货日期',
-        '总价'
+        '支付方式',
+        '收订',
+        '代收',
+        '销售员',
+        '收货地址详情',
+        '年龄',
+        '快递时间',
+        '快递费',
+        '快递公司',
+        '赠送抵用卷'
     ];
 
     public function export()
@@ -42,20 +46,43 @@ class OrdersExporter extends ExcelExporter
 
         $data = $this->getData();
 
+        $payment_method = [
+            'WeChatPay' => '微信支付',
+            'AliPay'    => '支付宝支付',
+            'fubei'     => '付呗'
+        ];
+
+        $express_company = [
+            'SF'       => '顺丰快递',
+            'YTO'      => '圆通快递'
+        ];
+
         if (count($data)) {
             foreach ($data as $v) {
+                $info = \DB::table('wechat_to_channels')->where([['datetime', '=', Carbon::parse($v['transaction_datetime'])->toDateString()], ['wechat_id', '=', $v['wechat_id']]])
+                    ->leftJoin('channels','wechat_to_channels.channel_id','=','channels.id')
+                    ->first();
+                $company = $info ? $info->name : '';
+                $user_name = \DB::table('users')->where('id',$v['user_id'])->value('name');
                 $row = [];
-                $row['name'] = $v['fans_name'];
-                $row['datetime'] = $v['datetime'];
-                $row['updated_at'] = $v['updated_at'];
-                $row['channel'] = $v['channel'];
-                $row['addr'] = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address'];
-                $row['quantity'] = $v['quantity'];
-                $row['prepayments'] = $v['prepayments'];
-                $row['taste'] = $v['taste'];
-                $row['tail'] = $v['total_amount'] - $v['prepayments'];
-                $row['tail'] = $v['total_amount'] - $v['prepayments'];
-                $row['total_amount'] = $v['total_amount'];
+                // 进线公司
+                // 获取当天该微信号的进线渠道
+                $row['company']                   = $company;
+                $row['datetime']                  = Carbon::parse($v['datetime'])->toDateString();
+                $row['transaction_datetime']      = Carbon::parse($v['transaction_datetime'])->toDateString();
+                $row['quantity']                  = $v['quantity'];
+                $row['total_amount']              = $v['total_amount'];
+                $row['taste']                     = $v['taste'];
+                $row['payment_method']            = $payment_method[$v['payment_method']];
+                $row['prepayments']               = $v['prepayments'];
+                $row['tail']                      = $v['total_amount'] - $v['prepayments'];
+                $row['seller']                    = $user_name;
+                $row['addr']                      = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address'];
+                $row['age']                       = $v['age'];
+                $row['express_time']              = '';
+                $row['express_price']             = '';
+                $row['express_company']           = $express_company[$v['ship_data']['ShipperCode']];
+                $row['coupon']                    = '';
                 $rows[] = $row;
             }
         }

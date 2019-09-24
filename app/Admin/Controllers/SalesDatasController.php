@@ -41,12 +41,6 @@ class SalesDatasController extends AdminController
                     ['datetime', '=', $this->sales_time],
                     ['wechat_id', '=', $this->wechat_id],
                 ])->value('channel_id');
-
-//                if($channel_id !== null){
-//                    return '渠道号<span style="color: red">'
-//                        .$channel_id.'</span>渠道公司:'
-//                        .\DB::table('channels')->where('id',$channel_id)->value('name');
-//                }
                 return $channel_id;
             }
             return '';
