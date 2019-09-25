@@ -39,10 +39,15 @@ class EnterPlansController extends AdminController
 
         $grid->column('datetime', '进线时间');
         $wechats = Wechat::query()->orderBy('code','asc')->get()->toArray();
-        //dd($wechats);
+
         foreach ($wechats as $v){
-            $grid->column($v['code'], $v['code'])->display(function () use ($v){
-                return '<a href="channel-assgins/17/edit" target="_blank">'.$this->{$v['code']}.'</a>';
+            $grid->column($v['code'], $v['code'])->display(function () use($v){
+                $channel_assgins_id = ($this->{$v['code']})['channel_assgins_id'];
+                if($channel_assgins_id){
+                    return $html =  '<a href="channel-assgins/'.$channel_assgins_id.'/edit" target="_blank">'.($this->{$v['code']})['mark'].'</a>';
+                }else{
+                    return $html =  '<a href="channel-assgins/create" target="_blank">+</a>';
+                }
             });
         }
         return $grid;

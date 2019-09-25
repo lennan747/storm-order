@@ -48,17 +48,19 @@ class EnterPlan extends Model
 
     public function paginate()
     {
-        dd(Request::toArray());
+        //dd(Request::toArray());
         $perPage = Request::get('per_page', 10);
 
         $page = Request::get('page', 1);
+        //dd($page);
 
         $start = ($page-1)*$perPage;
 
+        // 获取所有微信号
         $wechats = Wechat::query()->orderBy('code','asc')->get();
 
-        // 获取
-        $chnnel_assgins = ChannelAssgin::query()->orderBy('datetime', 'desc')->get();
+        // 获取所有渠道信息
+        $chnnel_assgins = ChannelAssgin::query()->offset($start)->limit($perPage)->orderBy('datetime', 'desc')->get();
         $res = [];
         $i = 0;
         $tag = [];
@@ -75,15 +77,22 @@ class EnterPlan extends Model
                 $res[$tag[$datetime]]['info']['wechat'] = $temp;
             }
         }
-
+        //dd($res);
         foreach ($res as $k => $v) {
             foreach ($wechats as $wechat) {
                 $wechat['code'] = (string)$wechat['code'];
-                if (in_array($wechat['id'], $res[$k]['info']['wechat']) && $res[$k]['info']['mark']) {
-                    $res[$k][$wechat['code']] = $res[$k]['info']['mark'];
+                if (in_array($wechat['id'], $res[$k]['info']['wechat'])) {
+                    $res[$k][$wechat['code']] = [
+                        'mark'               => $res[$k]['info']['mark'] ? $res[$k]['info']['mark'] : '111',
+                        'channel_assgins_id' => $res[$k]['info']['id']
+                    ];
                 }else{
-                    $res[$k][$wechat['code']] = "";
+                    $res[$k][$wechat['code']] = [
+                        'mark'               => '',
+                        'channel_assgins_id' => ''
+                    ];
                 }
+
             }
             unset($res[$k]['info']);
         }

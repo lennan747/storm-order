@@ -34,16 +34,11 @@ class ChannelAssginsController extends AdminController
         $grid->column('id', __('渠道编号'));
         //$grid->column('channel.code', __('渠道编号'));
         $grid->column('channel.name', __('渠道公司名称'));
-<<<<<<< HEAD
-        $grid->column('datetime', __('派单时间'))->sortable();
-        $grid->column('wechat', __('微信编号'))->display(function ($wechat){
-=======
         $grid->column('datetime', __('派单时间'))->display(function (){
             return Carbon::parse($this->datetime)->toDateString();
         });
+
         $grid->column('wechat', __('微信编号'))->display(function ($wechat) {
->>>>>>> master
-            //$this->wechat
             $html = "";
             foreach ($wechat as $value) {
                 $account = Wechat::query()->where('id', $value)->value('code');
@@ -51,6 +46,7 @@ class ChannelAssginsController extends AdminController
             }
             return $html;
         });
+
         $grid->column('company', __('指派人'));
         $grid->column('details', __('派单详情'));
         $grid->column('price', __('万粉单价'));
@@ -99,7 +95,7 @@ class ChannelAssginsController extends AdminController
         // 渠道公司
         $form->text('name', '渠道公司名称');
         $form->html('<div id="show_channel"></div>');
-        $form->html('<button id="check_channel" type="button">检查渠道信息</button>');
+        $form->html('<button id="check_channel" class="btn btn-sm btn-primary" type="button">检查渠道信息</button>');
         $form->text('channel_id', '渠道号')->rules('required')->readonly();
         $form->date('datetime', '派单时间')->default(date('Y-m-d'));
         $form->multipleSelect('wechat', '微信号')->options(Wechat::all()->pluck('code', 'id')->toArray());
@@ -115,22 +111,19 @@ class ChannelAssginsController extends AdminController
 
         //保存后回调
         $form->saved(function (Form $form) {
+            // 删除所有关系
+            $results = WechatToChannel::query()->where([['channel_assgin_id', '=', $form->model()->id]]);
+            if($results->exists()){
+                $results->delete();
+            }
+
             foreach ($form->wechat as $value) {
-                // 保存渠道指派信息后
-                // 保存指派关系
-                // 当日渠道
-                // 一个微信号
-                // 保存一条信息
-                if ($value != null && !WechatToChannel::query()->where([
-                        ['channel_assgin_id', '=', $form->model()->id],
-                        ['wechat_id', '=', $value],
-                        ['datetime', '=', $form->datetime]
-                    ])->exists()) {
+                if($value != null){
                     $data = new WechatToChannel([
-                        'wechat_id' => $value,
-                        'channel_id' => $form->channel_id,
+                        'wechat_id'         => $value,
+                        'channel_id'        => $form->channel_id,
                         'channel_assgin_id' => $form->model()->id,
-                        'datetime' => $form->datetime
+                        'datetime'          => $form->datetime
                     ]);
                     $data->save();
                 }
