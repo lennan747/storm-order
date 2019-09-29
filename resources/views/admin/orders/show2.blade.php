@@ -127,9 +127,6 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">物流信息</h3>
-                {{--<div class="box-tools pull-right">--}}
-                    {{--<button type="button" class="btn-sm btn-primary">更新物流信息</button>--}}
-                {{--</div>--}}
             </div>
             <div class="box-body">
                 <div class="table-responsive">
