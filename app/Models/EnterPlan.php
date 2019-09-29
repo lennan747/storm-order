@@ -61,6 +61,7 @@ class EnterPlan extends Model
 
         // 获取所有渠道信息
         $chnnel_assgins = ChannelAssgin::query()->offset($start)->limit($perPage)->orderBy('datetime', 'desc')->get();
+        //dd($chnnel_assgins);
         $res = [];
         $i = 0;
         $tag = [];
@@ -68,33 +69,38 @@ class EnterPlan extends Model
             $datetime = $v['datetime']->toDateString();
             if (empty($tag) || !isset($tag[$datetime])) {
                 $res[$i]['datetime'] = $datetime;
-                $res[$i]['info'] = $v;
+                $res[$i]['info'][$v['id']] = $v->toArray();
                 $tag[$datetime] = $i;
                 $i = $i + 1;
             }else{
-                $temp = $res[$tag[$datetime]]['info']['wechat'];
-                $temp = array_values(array_unique(array_merge($temp,$v['wechat'])));
-                $res[$tag[$datetime]]['info']['wechat'] = $temp;
+                // TODO
+                $res[$tag[$datetime]]['info'][$v['id']] = $v->toArray();
             }
         }
-        //dd($res);
+
+        foreach ($res as $key => $v){
+            $res[$key]['wechat'] = [];
+            foreach ($v['info'] as $k1 => $v1){
+                foreach ($v1['wechat'] as $v2){
+                    if(!isset($res[$key]['wechat'][$v2])){
+                        $res[$key]['wechat'][$v2] = $v1;
+                    }
+                }
+            }
+            unset($res[$key]['info']);
+        }
+
+
         foreach ($res as $k => $v) {
             foreach ($wechats as $wechat) {
-                $wechat['code'] = (string)$wechat['code'];
-                if (in_array($wechat['id'], $res[$k]['info']['wechat'])) {
-                    $res[$k][$wechat['code']] = [
-                        'mark'               => $res[$k]['info']['mark'] ? $res[$k]['info']['mark'] : '111',
-                        'channel_assgins_id' => $res[$k]['info']['id']
-                    ];
+                //$wechat['code'] = (string)$wechat['code'];
+                if(isset($res[$k]['wechat'][$wechat['code']])){
+                    $res[$k][$wechat['code']] = $v['wechat'][$wechat['code']];
                 }else{
-                    $res[$k][$wechat['code']] = [
-                        'mark'               => '',
-                        'channel_assgins_id' => ''
-                    ];
+                    $res[$k][$wechat['code']] = [];
                 }
-
             }
-            unset($res[$k]['info']);
+            unset($res[$k]['wechat']);
         }
         //dd($res);
         $movies = static::hydrate($res);

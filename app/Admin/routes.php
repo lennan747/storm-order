@@ -34,19 +34,30 @@ Route::group([
     $router->put('payments/{payment}', 'PaymentsController@update')->name('admin.payments.update');
     $router->get('payments/{payment}', 'PaymentsController@show')->name('admin.payments.show');
 
-    // 进线管理
-    $router->get('enter-plans/enter_data','EnterPlansController@enter_data');
-    $router->resource('enter-plans', EnterPlansController::class);
-
     // 销售管理
     $router->resource('sales-datas', SalesDatasController::class);
 
     // 微信号
     $router->resource('wechats', WechatsController::class);
 
+    // 进线计划
+    $router->get('enter-plans','EnterPlansController@index');
+    $router->put('enter-plans/{wechat_to_channels}','EnterPlansController@update')->name('admin.enter.plans.update');
+
     // 渠道
     $router->resource('channels', ChannelsController::class);
     $router->post('channels/check_channel','ChannelsController@check_channel');
     $router->post('channels/add_channel','ChannelsController@add_channel');
-    $router->resource('channel-assgins', ChannelAssginsController::class);
+//    $router->post('channels/check_channel','ChannelsController@check_channel');
+//    $router->post('channels/add_channel','ChannelsController@add_channel')->name('admin.channels.add');
+//    $router->resource('channel-assgins', ChannelAssginsController::class);
+
+    // 进线管理
+//    $router->get('enter-plans/enter_data','EnterPlansController@enter_data');
+//    $router->resource('enter-plans', EnterPlansController::class);
+
+    $router->resource('plans', PlansController::class);
+    $router->post('plans/add_plans','PlansController@add_plans');
+    $router->post('plans/data_plans','PlansController@data_plans');
+    $router->post('plans/clear','PlansController@clear');
 });

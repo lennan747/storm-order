@@ -14,12 +14,13 @@ class CreateWechatToChannelsTable extends Migration
     public function up()
     {
         Schema::create('wechat_to_channels', function (Blueprint $table) {
-            //$table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->integer('wechat_id');
-            $table->integer('channel_id');
-            $table->integer('channel_assgin_id');
+            $table->integer('channel_id')->nullable();
+            //$table->integer('plan_id');
             $table->date('datetime');
-            $table->timestamps();
+            $table->text('mark')->nullable();
+            //$table->timestamps();
         });
     }
 

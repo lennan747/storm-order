@@ -15,9 +15,12 @@ class WechatToChannel extends Model
     protected $fillable =[
         'wechat_id',
         'channel_id',
-        'channel_assgin_id',
-        'datetime'
+        //'plan_id',
+        'datetime',
+        'mark'
     ];
+
+    public $timestamps = false;
 
     public function channel(){
         return $this->belongsTo(ChannelAssgin::class);
