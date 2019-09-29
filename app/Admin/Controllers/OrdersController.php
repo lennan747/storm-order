@@ -118,52 +118,19 @@ class OrdersController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Order::findOrFail($id));
-
-        $show->id('ID');
-        $show->no('订单流水号');
-        $show->prepayments('预付款');
-        $show->total_amount('订单金额');
-        $show->divider();
-
-        $show->closed('订单状态');
-        $show->created_at('下单时间');
-        $show->updated_at('更新时间');
-
-        $show->divider();
-        $show->ship_status('物流状态')->using(Order::$shipStatusMap);
-        $show->ship_data('物流数据');
-
-        $show->divider();
-        $show->name('客户姓名');
-        $show->datetime('客户进粉时间');
-        $show->phone_number('客户电话号码');
-        $show->remark('客户备注');
-        $show->reviewed('客户反馈');
-        $show->address('收货地址')->as(function ($address) {
-            $html = "";
-            foreach ($address as $value){
-                $html = $html.$value;
-            }
-            return $html;
-        });
-
-        $show->user('下单员',function($user){
-            $user->setResource('/admin/users');
-            $user->name('账户名');
-        });
-
-        $show->paymentMethod('支付',function ($paymentMethod){
-            $paymentMethod->setResource('/admin/payment');
-            $paymentMethod->name('支付方式');
-        });
-        return $show;
+        $order = Order::findOrFail($id);
+        $express = [
+            'YD'  => '韵达快递',
+            'YTO' => '圆通速递',
+            'SF'  => '顺丰快递'
+        ];
+        return view('admin.orders.show2',['order' => $order,'express' => $express]);
     }
 
-    public function show($id, Content $content)
-    {
-        return $content->header('订单详情')->body($this->detailNew($id));
-    }
+//    public function show($id, Content $content)
+//    {
+//        return $content->header('订单详情')->body($this->detailNew($id));
+//    }
 
 
     public function detailNew($id)
