@@ -31,13 +31,13 @@ class PlansController extends AdminController
         $datetime_start = request()->datetime_start ? request()->datetime_start: '1970-00-00';
         $datetime_end = request()->datetime_end ? request()->datetime_end : '2049-09-28';
         // 获取所有微信号
-        $wechats = Wechat::query()->orderBy('id', 'desc')->get();
+        $wechats = Wechat::query()->orderBy('id', 'asc')->get();
         // 渠道与微信关系
         $plans = WechatToChannel::query()
             ->where('datetime','>=',$datetime_start)
             ->where('datetime','<=',$datetime_end)
             ->orderBy('datetime', 'desc')
-            ->orderBy('wechat_id', 'desc')
+            ->orderBy('wechat_id', 'asc')
             ->get()
             ->groupBy('datetime');
         // 获取所有渠道公司
@@ -86,7 +86,7 @@ class PlansController extends AdminController
         if(request()->plan_datetime == ''){
             $error = new MessageBag([
                 'title' => '添加计划',
-                'message' => '请选择时间',
+                'message' => '请输入时间',
             ]);
             return back()->with(compact('error'));
         }
