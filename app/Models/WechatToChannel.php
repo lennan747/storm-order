@@ -6,12 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class WechatToChannel extends Model
 {
-    //
-    //
     protected $table = 'wechat_to_channels';
 
-
-    //
     protected $fillable =[
         'wechat_id',
         'channel_id',

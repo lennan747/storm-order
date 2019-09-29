@@ -3,11 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Channel;
-use App\Models\Plan;
 use App\Models\Wechat;
 use App\Models\WechatToChannel;
-use Carbon\Carbon;
-use DateTime;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -30,10 +27,9 @@ class PlansController extends AdminController
      */
     protected function grid()
     {
+        // 时间选择
         $datetime_start = request()->datetime_start ? request()->datetime_start: '1970-00-00';
         $datetime_end = request()->datetime_end ? request()->datetime_end : '2049-09-28';
-
-        //dd([$datetime_start,$datetime_end]);
         // 获取所有微信号
         $wechats = Wechat::query()->orderBy('id', 'desc')->get();
         // 渠道与微信关系
@@ -87,10 +83,17 @@ class PlansController extends AdminController
      */
     public function store()
     {
-        if (WechatToChannel::query()->where('datetime', request()->datetime)->exists()) {
+        if(request()->plan_datetime == ''){
             $error = new MessageBag([
                 'title' => '添加计划',
-                'message' => request()->datetime . '计划已存在',
+                'message' => '请选择时间',
+            ]);
+            return back()->with(compact('error'));
+        }
+        if (WechatToChannel::query()->where('datetime', request()->plan_datetime)->exists()) {
+            $error = new MessageBag([
+                'title' => '添加计划',
+                'message' => request()->plan_datetime . '计划已存在',
             ]);
             return back()->with(compact('error'));
         }
@@ -101,7 +104,7 @@ class PlansController extends AdminController
         foreach ($wechat_ids as $k => $v) {
             $data[$k] = [
                 'wechat_id' => $v,
-                'datetime' => request()->datetime,
+                'datetime' => request()->plan_datetime,
             ];
         }
 

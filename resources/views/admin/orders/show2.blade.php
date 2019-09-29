@@ -38,6 +38,10 @@
                                 <td>{{ $order->created_at }}</td>
                             </tr>
                             <tr>
+                                <td width="120px">成交时间</td>
+                                <td>{{ $order->transaction_datetime }}</td>
+                            </tr>
+                            <tr>
                                 <td width="120px">数量</td>
                                 <td>{{ $order->quantity }}</td>
                             </tr>
@@ -59,6 +63,10 @@
                             <tr>
                                 <td width="120px">客户名称</td>
                                 <td>{{ $order->fans_name }}</td>
+                            </tr>
+                            <tr>
+                                <td width="120px">客户年纪</td>
+                                <td>{{ $order->age }}</td>
                             </tr>
                             <tr>
                                 <td width="120px">进粉时间</td>
@@ -92,9 +100,9 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">物流信息</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn-sm btn-primary">更新物流信息</button>
-                </div>
+                {{--<div class="box-tools pull-right">--}}
+                    {{--<button type="button" class="btn-sm btn-primary">更新物流信息</button>--}}
+                {{--</div>--}}
             </div>
             <div class="box-body">
                 <div class="table-responsive">

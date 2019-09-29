@@ -27,16 +27,31 @@ class ChannelsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Channel);
-
-        $grid->column('id', __('Id'));
-        $grid->column('code', __('渠道编号'));
+        $grid->column('id', __('渠道编号'));
         $grid->column('name', __('渠道公司名称'));
-//        $grid->column('created_at', __('Created at'));
-//        $grid->column('updated_at', __('Updated at'));
-
         return $grid;
     }
 
+    /**
+     * Make a show builder.
+     *
+     * @param mixed $id
+     * @return Show
+     */
+    protected function detail($id)
+    {
+        $show = new Show(Channel::findOrFail($id));
+
+        $show->field('id', '渠道编号');
+        $show->field('name', '渠道公司名称');
+
+        return $show;
+    }
+
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function check_channel()
     {
         $name = request()->name;
@@ -53,6 +68,21 @@ class ChannelsController extends AdminController
             ->get()
             ->toArray();
         return response()->json($channel);
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        $form = new Form(new Channel);
+
+        //$form->text('code', __('渠道编号'));
+        $form->text('name', __('渠道公司名称'));
+
+        return $form;
     }
 
     /**
@@ -74,6 +104,10 @@ class ChannelsController extends AdminController
         return response()->json(['status' => true,'id' => $channel->id]);
     }
 
+    /**
+     * @param $str
+     * @return array
+     */
     public function str2arr_utf8($str)
     {
         $len = mb_strlen($str, 'utf-8');

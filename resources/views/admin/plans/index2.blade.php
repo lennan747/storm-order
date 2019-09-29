@@ -3,7 +3,7 @@
         <div class="alert alert-danger alert-dismissible" style="display: none;">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-           <span id="alert"></span>
+            <span id="alert"></span>
         </div>
     </div>
     <div class="col-sm-12">
@@ -17,7 +17,8 @@
                                 <input type="text" class="form-control col-sm-12" name="channel_name" value="" required>
                             </div>
                             <div class="clo-sm-3">
-                                <button type="button" id="check_channel" class="btn btn-primary" onclick="check_channel()">查询
+                                <button type="button" id="check_channel" class="btn btn-primary"
+                                        onclick="check_channel()">查询
                                 </button>
                             </div>
                         </div>
@@ -31,45 +32,47 @@
                     <div class="box-body">
                         <form id="myFormId" action="/admin/plans/add_plans" class="form-horizontal" method="post">
                             @csrf
-                        <div class="row">
-                            <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-2">
 
-                                <select class="form-control channels" data-placeholder="选择渠道" style="width: 100%;">
-                                    <option value="">请选择渠道</option>
-                                    @foreach($channels as $k => $v)
-                                <option value="{{ $k }}">{{$v }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="hidden" class="form-control pull-right" name="channels" value="" placeholder="选择渠道">
-                            </div>
+                                    <select class="form-control channels" data-placeholder="选择渠道" style="width: 100%;">
+                                        <option value="">请选择渠道</option>
+                                        @foreach($channels as $k => $v)
+                                            <option value="{{ $k }}">{{$v }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" class="form-control pull-right" name="channels" value=""
+                                           placeholder="选择渠道">
+                                </div>
 
-                            <div class="col-sm-3">
-                                <select class="form-control wechats" multiple="multiple" data-placeholder="微信编号"
-                                        style="width: 100%;">
-                                    @foreach($wechats as $wechat)
-                                        <option value="{{ $wechat->id }}">{{ $wechat->code }} {{ $wechat->name }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="hidden" name="wechats" value="[]">
-                            </div>
+                                <div class="col-sm-3">
+                                    <select class="form-control wechats" multiple="multiple" data-placeholder="微信编号"
+                                            style="width: 100%;">
+                                        @foreach($wechats as $wechat)
+                                            <option value="{{ $wechat->id }}">{{ $wechat->code }} {{ $wechat->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" name="wechats" value="[]">
+                                </div>
 
-                            <div class="col-sm-3">
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                <div class="col-sm-3">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="datetime" class="form-control pull-right"
+                                               id="datepicker" placeholder="选择日期" autocomplete="off" >
                                     </div>
-                                    <input type="text" name="datetime" class="form-control pull-right" id="datepicker" placeholder="选择日期">
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control pull-right" name="mark">
+                                </div>
+                                <div class="clo-sm-1">
+                                    <button type="submit" class="btn btn-primary"> +
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control pull-right" name="mark">
-                            </div>
-                            <div class="clo-sm-1">
-                                <button type="submit" class="btn btn-primary"> +
-                                </button>
-                            </div>
-                        </div>
                         </form>
                     </div>
                 </div>
@@ -79,10 +82,47 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <div class="btn-group pull-right grid-create-btn">
-                            <a href="/admin/plans/create" class="btn btn-sm btn-success">添加时间</a>
+                        <div class="pull-left col-md-10">
+                            <form action="/admin/plans" method="get">
+
+                                <div class="col-sm-2">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="datetime_start" class="form-control pull-right"
+                                               id="datepicker_start" placeholder="选择开始日期" autocomplete="off" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" name="datetime_end" class="form-control pull-right"
+                                               id="datepicker_end" placeholder="选择开始日期" autocomplete="off" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-sm btn-primary">搜索计划</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="pull-right col-md-2">
+                            <form action="/admin/plans" method="post">
+                                @csrf
+                                <div class="col-md-8">
+                                    <input type="text" name="plan_datetime" class="form-control pull-left" id="plan_datetime" placeholder="选择日期" autocomplete="off" >
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-sm btn-primary">创建计划</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <thead>
@@ -104,7 +144,8 @@
                                                 <a href='#'
                                                    onclick="edit_channel({{ $plan[$wkey]['id'].','.$plan[$wkey]['channel_id'].',"'.$plan[$wkey]['datetime'].'","'. $wechat['id'].'","'.$plan[$wkey]['mark'].'"'}})">{{ $plan[$wkey]['mark'] != null ? $plan[$wkey]['mark'] : '备注'}}</a>
                                             @else
-                                                <a href='#' onclick="add_channel({{ $plan[$wkey]['id'].',"'.$plan[$wkey]['datetime'].'",'.$wechat['id']}})">+</a>
+                                                <a href='#'
+                                                   onclick="add_channel({{ $plan[$wkey]['id'].',"'.$plan[$wkey]['datetime'].'",'.$wechat['id']}})">+</a>
                                             @endif
                                         </td>
                                     @endforeach
@@ -162,26 +203,29 @@
         // 微信多选下拉
         $('.wechats').select2();
         // 微信多选下拉事件
-        $(".wechats").on('change',function () {
+        $(".wechats").on('change', function () {
             $('input[name="wechats"]').val($('.wechats').val());
         });
 
         $('.channels').select2();
-        $(".channels").on('change',function () {
+        $(".channels").on('change', function () {
             $('input[name="channels"]').val($('.channels').val());
         });
         // 日期
         $('#datepicker').datepicker({autoclose: true, format: 'yyyy-mm-dd', language: 'zh-CN',});
+        $('#datepicker_start').datepicker({autoclose: true, format: 'yyyy-mm-dd', language: 'zh-CN',});
+        $('#datepicker_end').datepicker({autoclose: true, format: 'yyyy-mm-dd', language: 'zh-CN',});
+        $('#plan_datetime').datepicker({autoclose: true, format: 'yyyy-mm-dd', language: 'zh-CN',});
 
         // 选择渠道后改变事件
-        $('.check_channle').on('change',function () {
+        $('.check_channle').on('change', function () {
             var options = $(".check_channle option:selected");
-            var html =  '<a href="#" class="btn btn-primary" onclick="checked_channel('+options.val()+')">选择渠道到计划</a>';
+            var html = '<a href="#" class="btn btn-primary" onclick="checked_channel(' + options.val() + ')">选择渠道到计划</a>';
             $('#add_html').html(html)
         });
 
         // 确定添加到渠道
-        $('#sure').on('click',function () {
+        $('#sure').on('click', function () {
             console.log(11111);
             var name = $('input[name="channel_name"]').val();
             if (name) {
@@ -190,16 +234,16 @@
                     'name': name,
                 }, function (data) {
                     //添加渠道成功
-                    if(data.status){
-                        $('.channels').append('<option value="'+data.id+'">'+name+'</option>');
+                    if (data.status) {
+                        $('.channels').append('<option value="' + data.id + '">' + name + '</option>');
                         $('.channels').val(data.id).select2();
                         $('input[name="channels"]').val($('.channels').val());
-                    }else{
+                    } else {
                         alert('当前渠道已存在');
                     }
                     close_modal();
                 });
-            }else{
+            } else {
                 $('#alert').html('请输入渠道名称');
                 $('.alert').css('display', 'block').addClass("in");
                 setTimeout(function () {
@@ -222,11 +266,11 @@
                 console.log(data);
                 // 找到相似渠道
                 if (data.length > 0) {
-                    var html= '';
+                    var html = '';
                     $('#check_tip').html('找到相似渠道');
                     // 添加到渠道选择框
                     data.forEach(function (item) {
-                        html = html + '<option value="'+ item.id+'">'+ item.name +'</option>';
+                        html = html + '<option value="' + item.id + '">' + item.name + '</option>';
                     });
                     $('.check_channle').html(html);
                     // 显示选择框
@@ -238,7 +282,7 @@
                 //
                 open_modal();
             });
-        }else{
+        } else {
             $('#alert').html('请输入渠道名称');
             $('.alert').css('display', 'block').addClass("in");
             setTimeout(function () {
@@ -273,14 +317,14 @@
     }
 
     //
-    function add_channel(id,datetime,wechat_id) {
+    function add_channel(id, datetime, wechat_id) {
         $('input[name="datetime"]').val(datetime);
         //$('.channels').val([wechat_id]).select2();
         $('.wechats').select2().val([wechat_id]).select2();
         $('input[name="wechats"]').val([wechat_id]);
     }
 
-    function edit_channel(id,channel,datetime,wechat_id,mark) {
+    function edit_channel(id, channel, datetime, wechat_id, mark) {
         $('input[name="datetime"]').val(datetime);
         $('.channels').val(channel).select2();
         $('input[name="channels"]').val(channel);
@@ -295,12 +339,12 @@
         // 返回的是微信id
         var r = confirm("确认删除");
         if (r == true) {
-            $.post('/admin/plans/clear',{
+            $.post('/admin/plans/clear', {
                 _token: LA.token,
                 'id': id
-            },function (data) {
+            }, function (data) {
                 //console.log(data);
-                if(data){
+                if (data) {
                     location.reload();
                 }
             });
