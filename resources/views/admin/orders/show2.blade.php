@@ -38,13 +38,10 @@
                                 <td>{{ $order->created_at }}</td>
                             </tr>
                             <tr>
-<<<<<<< HEAD
-=======
                                 <td width="120px">成交时间</td>
                                 <td>{{ $order->transaction_datetime }}</td>
                             </tr>
                             <tr>
->>>>>>> 941bd467c5de9db6189dd5cfd2bc5f4e9c25a8da
                                 <td width="120px">数量</td>
                                 <td>{{ $order->quantity }}</td>
                             </tr>
@@ -68,13 +65,10 @@
                                 <td>{{ $order->fans_name }}</td>
                             </tr>
                             <tr>
-<<<<<<< HEAD
-=======
                                 <td width="120px">客户年纪</td>
                                 <td>{{ $order->age }}</td>
                             </tr>
                             <tr>
->>>>>>> 941bd467c5de9db6189dd5cfd2bc5f4e9c25a8da
                                 <td width="120px">进粉时间</td>
                                 <td>{{ $order->datetime }}</td>
                             </tr>
@@ -106,15 +100,6 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">物流信息</h3>
-<<<<<<< HEAD
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn-sm btn-primary">更新物流信息</button>
-                </div>
-=======
-                {{--<div class="box-tools pull-right">--}}
-                    {{--<button type="button" class="btn-sm btn-primary">更新物流信息</button>--}}
-                {{--</div>--}}
->>>>>>> 941bd467c5de9db6189dd5cfd2bc5f4e9c25a8da
             </div>
             <div class="box-body">
                 <div class="table-responsive">
