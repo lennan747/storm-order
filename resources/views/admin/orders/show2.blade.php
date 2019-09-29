@@ -30,10 +30,6 @@
                                 <td>{{ $order->payment_method }}</td>
                             </tr>
                             <tr>
-                                <td width="120px">下单员</td>
-                                <td>{{ $order->user->name }}</td>
-                            </tr>
-                            <tr>
                                 <td width="120px">下单时间</td>
                                 <td>{{ $order->created_at }}</td>
                             </tr>
@@ -48,6 +44,37 @@
                             <tr>
                                 <td width="120px">口味</td>
                                 <td>{{ $order->taste }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">下单员信息</h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <td width="120px">下单员</td>
+                                <td>{{ $order->user->name }}</td>
+                            </tr>
+                            <tr>
+                                <td width="120px">微信编号</td>
+                                <td>{{ $order->wechat->code }}</td>
+                            </tr>
+                            <tr>
+                                <td width="120px">微信账号</td>
+                                <td>{{ $order->wechat->account }}</td>
+                            </tr>
+                            <tr>
+                                <td width="120px">微信二维码</td>
+                                <td><img src="{{ $order->wechat->qrcode }}" style="max-width:50px;max-height:50px" class="img img-thumbnail"></td>
+                            </tr>
+                            <tr>
+                                <td width="120px">微信手机号</td>
+                                <td>{{ $order->wechat->phone }}</td>
                             </tr>
                         </table>
                     </div>
