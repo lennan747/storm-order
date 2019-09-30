@@ -41,7 +41,9 @@ class SalesDatasController extends AdminController
                     ['datetime', '=', $this->sales_time],
                     ['wechat_id', '=', $this->wechat_id],
                 ])->value('channel_id');
-                return $channel_id;
+
+                 return \DB::table('channels')->where('id',$channel_id)->value('name');
+                //return $channel_id;
             }
             return '';
         });
