@@ -61,7 +61,8 @@ class OrdersController extends AdminController
 //                if($channel_id !== null){
 //                    return \DB::table('channels')->where('id',$channel_id)->value('code');
 //                }
-                return $channel_id;
+                return \DB::table('channels')->where('id',$channel_id)->value('name');
+                //return $channel_id;
             }
             return '';
         });
