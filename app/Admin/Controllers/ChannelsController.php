@@ -29,6 +29,10 @@ class ChannelsController extends AdminController
         $grid = new Grid(new Channel);
         $grid->column('id', __('渠道编号'));
         $grid->column('name', __('渠道公司名称'));
+//        $grid->column('order','渠道成交金额')->display(function (){
+//            // 获取当前渠道所有订单并且计算金额
+//            \DB::table();
+//        });
         return $grid;
     }
 
