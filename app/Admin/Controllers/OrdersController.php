@@ -55,7 +55,7 @@ class OrdersController extends AdminController
         $grid->column('channels', '进线渠道')->display(function (){
             if($this->transaction_datetime && $this->wechat_id){
                 $channel_id = \DB::table('wechat_to_channels')->where([
-                    ['datetime', '=', $this->transaction_datetime],
+                    ['datetime', '=', $this->datetime],
                     ['wechat_id', '=', $this->wechat_id],
                 ])->value('channel_id');
 //                if($channel_id !== null){
