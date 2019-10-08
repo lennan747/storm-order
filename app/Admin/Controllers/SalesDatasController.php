@@ -69,7 +69,7 @@ class SalesDatasController extends AdminController
         $grid->column('transaction_amount', '交易金额');
         $grid->column('transaction_number', '交易订单数');
         $grid->column('h_amount', '订单实际成交金额')->display(function () {
-            return \DB::table('orders')->where([['user_id','=',$this->user_id],['wechat_id', '=', $this->wechat_id], ['datetime', '=', $this->sales_time]])->sum('total_amount');
+            return \DB::table('orders')->where([['wechat_id', '=', $this->wechat_id], ['datetime', '=', $this->sales_time]])->sum('total_amount');
         });
         $grid->column('delete_rate', '删粉率')->display(function () {
             return $this->enter_number == 0 ? 0 : number_format($this->delete_number / $this->enter_number, 4) * 100 . '%';
