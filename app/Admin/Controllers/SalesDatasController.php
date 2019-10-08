@@ -148,6 +148,7 @@ class SalesDatasController extends AdminController
 
         $form->number('user_id', __('User id'));
         $form->date('sales_time', __('Sales time'))->default(date('Y-m-d'));
+        $form->number('wechat_id', __('wechat_id'));
         $form->text('channel', __('Channel'));
         $form->number('enter_number', __('Enter number'));
         $form->number('repay_number', __('Repay number'));
