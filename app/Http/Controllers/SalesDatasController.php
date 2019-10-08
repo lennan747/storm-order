@@ -12,7 +12,7 @@ class SalesDatasController extends Controller
     //
     public function index(Request $request)
     {
-        $salesDatas = $request->user()->salesData()->orderBy('sales_time','desc')->paginate(10);
+        $salesDatas = $request->user()->salesData()->orderBy('sales_time','desc')->paginate(100);
         $weachts = $request->user()->wechat()->get();
         //dd($weachts);
         return view('sales.index',compact('salesDatas','weachts'));
