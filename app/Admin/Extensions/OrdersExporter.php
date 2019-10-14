@@ -47,6 +47,7 @@ class OrdersExporter extends ExcelExporter
         $rows[] = $this->headingsYw;
 
         $data = $this->getData();
+        //dd($data);
 
         $payment_method = [
             'WeChatPay' => '微信支付',
@@ -83,7 +84,7 @@ class OrdersExporter extends ExcelExporter
                 $row['wechat']                    = $wechat;
                 $row['addr']                      = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address']
                     .' '.$v['fans_name'].' '.$v['phone_number'].' ';
-                $row['mark']                      = $v['mark'];
+                $row['mark']                      = $v['remark'];
                 $row['age']                       = $v['age'];
                 $row['express_time']              = '';
                 $row['express_price']             = '';
