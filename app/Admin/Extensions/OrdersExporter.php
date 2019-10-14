@@ -28,8 +28,7 @@ class OrdersExporter extends ExcelExporter
         '支付方式',
         '收订',
         '代收',
-        '销售员',
-        '微信编号',
+        '销售员/微信编号',
         '收货地址详情',
         '备注',
         '年龄',
@@ -80,8 +79,7 @@ class OrdersExporter extends ExcelExporter
                 $row['payment_method']            = $payment_method[$v['payment_method']];
                 $row['prepayments']               = $v['prepayments'];
                 $row['tail']                      = $v['total_amount'] - $v['prepayments'];
-                $row['seller']                    = $user_name;
-                $row['wechat']                    = $wechat;
+                $row['seller']                    = $user_name.' '.$wechat;
                 $row['addr']                      = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address']
                     .' '.$v['fans_name'].' '.$v['phone_number'].' ';
                 $row['mark']                      = $v['remark'];
