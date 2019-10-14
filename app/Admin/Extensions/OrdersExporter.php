@@ -29,7 +29,9 @@ class OrdersExporter extends ExcelExporter
         '收订',
         '代收',
         '销售员',
+        '微信编号',
         '收货地址详情',
+        '备注',
         '年龄',
         '快递时间',
         '快递费',
@@ -62,6 +64,7 @@ class OrdersExporter extends ExcelExporter
                 $info = \DB::table('wechat_to_channels')->where([['datetime', '=', Carbon::parse($v['transaction_datetime'])->toDateString()], ['wechat_id', '=', $v['wechat_id']]])
                     ->leftJoin('channels','wechat_to_channels.channel_id','=','channels.id')
                     ->first();
+                $wechat = \DB::table('wechat')->where('id',$v['wechat_id'])->value('code');
                 $company = $info ? $info->name : '';
                 $user_name = \DB::table('users')->where('id',$v['user_id'])->value('name');
                 $row = [];
@@ -77,7 +80,10 @@ class OrdersExporter extends ExcelExporter
                 $row['prepayments']               = $v['prepayments'];
                 $row['tail']                      = $v['total_amount'] - $v['prepayments'];
                 $row['seller']                    = $user_name;
-                $row['addr']                      = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address'];
+                $row['wechat']                    = $wechat;
+                $row['addr']                      = $v['address']['province'].$v['address']['city'].$v['address']['district'].$v['address']['address']
+                    .' '.$v['fans_name'].' '.$v['phone_number'].' ';
+                $row['mark']                      = $v['mark'];
                 $row['age']                       = $v['age'];
                 $row['express_time']              = '';
                 $row['express_price']             = '';

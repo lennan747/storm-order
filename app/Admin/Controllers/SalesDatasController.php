@@ -40,10 +40,8 @@ class SalesDatasController extends AdminController
                 foreach ($plans as $v){
                     $sql = $sql.'(wechat_id = '.$v->wechat_id.' and sales_time = "'.$v->datetime.'") or ';
                 }
-                //dd($sql);
                 $query->whereRaw($sql.'(id = 1)');
             }, '进线渠道');
-
         });
 
         $grid->model()->orderby('sales_time', 'desc');
