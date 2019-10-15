@@ -78,6 +78,7 @@
                         <!-- 物流信息不为空显示 -->
                             @if(isset($order->ship_data['Traces']))
                                 <ul class="list-group">
+                                    <li class="list-group-item list-group-item-secondary">物流单号:{{ $order->ship_data['LogisticCode'] }}</li>
                                     @foreach($order->ship_data['Traces'] as $traces)
                                         <li class="list-group-item list-group-item-secondary">{{ $traces['AcceptTime'].':'.$traces['AcceptStation'] }}</li>
                                     @endforeach
