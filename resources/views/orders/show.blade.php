@@ -68,6 +68,7 @@
                     </div>
                     <div class="card-footer">
                         @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
+                                <div class="col-md-5">物流单号：{{ $order->ship_data['LogisticCode'] }}</div>
                             <form class="form-inline" action="{{ route('orders.logistics',['order' => $order->id]) }}" method="GET" accept-charset="UTF-8">
                                 @csrf
                                 <button type="submit" class="btn btn-primary my-1">更新物流</button>
