@@ -61,7 +61,7 @@ class OrdersExporter extends ExcelExporter
 
         if (count($data)) {
             foreach ($data as $v) {
-                $info = \DB::table('wechat_to_channels')->where([['datetime', '=', Carbon::parse($v['transaction_datetime'])->toDateString()], ['wechat_id', '=', $v['wechat_id']]])
+                $info = \DB::table('wechat_to_channels')->where([['datetime', '=', Carbon::parse($v['datetime'])->toDateString()], ['wechat_id', '=', $v['wechat_id']]])
                     ->leftJoin('channels','wechat_to_channels.channel_id','=','channels.id')
                     ->first();
                 $wechat = \DB::table('wechat')->where('id',$v['wechat_id'])->value('code');
