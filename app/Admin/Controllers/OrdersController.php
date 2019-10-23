@@ -86,7 +86,7 @@ class OrdersController extends AdminController
             return User::find($userId)->name;
         });
         $grid->actions(function ($actions){
-            $actions->disableDelete();
+            //$actions->disableDelete();
             //$actions->disableEdit();
         });
 
